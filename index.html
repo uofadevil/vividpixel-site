@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vivid Pixel — Digital Signage</title>
+  <meta name="description" content="Vivid Pixel designs, installs, and manages digital signage that turns attention into action." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --text: #ffffff;
+      --muted: #b8c0cc;
+      --blue: #00b3ff; /* vivid accent */
+      --card: #111214;
+      --border: #252a33;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin:0; height:100%; background: var(--bg); color: var(--text); font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 24px; }
+    /* Header */
+    header { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(8px); background: rgba(10,10,10,0.75); border-bottom: 1px solid var(--border); }
+    .nav { display:flex; align-items:center; justify-content:space-between; gap: 16px; }
+    .brand { display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.4px; }
+    .dot { width:14px; height:14px; border-radius:50%; background: var(--blue); box-shadow:0 0 18px rgba(0,179,255,.65); }
+    .nav a.btn { background: var(--blue); color:#001018; padding:10px 14px; border-radius: 999px; font-weight:700; box-shadow: 0 8px 24px rgba(0,179,255,.25); border: 1px solid rgba(255,255,255,.06); }
+    .nav a.btn:hover { transform: translateY(-1px); box-shadow: 0 14px 28px rgba(0,179,255,.28); }
+    .menu { display:flex; gap:18px; align-items:center; }
+    .menu a { color: var(--muted); font-weight:600; }
+    .menu a.active, .menu a:hover { color: var(--text); }
+
+    /* Hero */
+    .hero { display:grid; grid-template-columns: 1.1fr .9fr; gap: 32px; align-items:center; padding: 56px 0 28px; }
+    .badge { display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border:1px solid var(--border); border-radius:999px; color: var(--muted); }
+    .badge .glow { width:8px; height:8px; border-radius:50%; background: var(--blue); box-shadow: 0 0 10px rgba(0,179,255,.9); }
+    h1 { font-size: clamp(34px, 5vw, 64px); line-height: 1.05; margin: 14px 0 12px; font-weight: 800; }
+    .sub { color: var(--muted); font-size: clamp(16px, 2vw, 20px); max-width: 56ch; }
+    .cta { display:flex; gap:12px; margin-top: 22px; }
+    .cta .primary { background: linear-gradient(135deg, var(--blue), #35d0ff); color:#001018; padding:14px 18px; border-radius:12px; border: 1px solid rgba(255,255,255,.06); font-weight:800; box-shadow: 0 10px 30px rgba(0,179,255,.35); }
+    .cta .primary:hover { transform: translateY(-1px); box-shadow: 0 16px 36px rgba(0,179,255,.4); }
+    .cta .ghost { background: transparent; color: var(--text); padding:14px 18px; border-radius:12px; border: 1px solid var(--border); font-weight:700; }
+    .display { background: radial-gradient(1200px 400px at 0% 0%, rgba(0,179,255,.08), transparent 60%),
+                linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0));
+               border:1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow);
+               aspect-ratio: 16/10; display:grid; place-items:center; overflow:hidden; }
+    .display .mock { width:100%; height:100%; border-radius:12px; background: conic-gradient(from 180deg at 50% 50%, #0f1f2a, #0b1320, #0f1f2a);
+                      position:relative; }
+    .scanline { position:absolute; inset:0; background: repeating-linear-gradient( to bottom, rgba(0,179,255,.08), rgba(0,179,255,.08) 1px, transparent 1px, transparent 3px ); mix-blend-mode:screen; opacity:.7; }
+    .ticker { position:absolute; bottom:10px; left:10px; right:10px; height:36px; border-radius:8px; overflow:hidden; border:1px solid rgba(255,255,255,.08); background: rgba(0,0,0,.35); display:flex; align-items:center; }
+    .ticker span { white-space:nowrap; padding-left:100%; display:inline-block; animation: scroll 18s linear infinite; color: #cfefff; font-weight:700; }
+    @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+
+    /* Sections */
+    section { padding: 56px 0; border-top: 1px solid var(--border); }
+    h2 { font-size: clamp(24px, 3.2vw, 36px); margin: 0 0 18px; }
+    .grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card { background: var(--card); border:1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .card h3 { margin: 0 0 8px; font-size: 18px; }
+    .muted { color: var(--muted); }
+
+    /* Portfolio placeholders */
+    .thumb { aspect-ratio: 16/9; border-radius: 12px; background: linear-gradient(135deg, #07131a, #0c1b26); border:1px solid var(--border); display:grid; place-items:center; color:#8fe3ff; font-weight:800; letter-spacing: .06em; }
+
+    /* Contact */
+    form { display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    form .full { grid-column: 1 / -1; }
+    label { display:block; font-weight:700; margin-bottom: 6px; }
+    input, select, textarea { width:100%; background:#0b0c0f; color:var(--text); border:1px solid var(--border); border-radius: 12px; padding: 12px 12px; font-size: 16px; }
+    textarea { min-height: 120px; }
+    .hint { font-size: 12px; color: var(--muted); margin-top: 6px; }
+    .submit { background: var(--blue); color:#001018; padding:14px 18px; border-radius:12px; border: 1px solid rgba(255,255,255,.06); font-weight:800; box-shadow: 0 10px 30px rgba(0,179,255,.35); cursor:pointer; }
+    .foot { display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--border); padding-top:18px; margin-top: 28px; color: var(--muted); }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      form { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="wrap nav">
+      <div class="brand" aria-label="Vivid Pixel">
+        <div class="dot" aria-hidden="true"></div>
+        <span>Vivid&nbsp;Pixel</span>
+      </div>
+      <nav class="menu" aria-label="Primary">
+        <a href="#services">Services</a>
+        <a href="#work">Portfolio</a>
+        <a href="#about">About</a>
+        <a href="#contact" class="btn">Get a Quote</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <div class="wrap">
+    <section class="hero" aria-label="Hero">
+      <div>
+        <span class="badge"><span class="glow"></span> Digital Signage that Moves People</span>
+        <h1>Design, install, and manage displays that turn attention into action.</h1>
+        <p class="sub">From retail storefronts to corporate lobbies, Vivid Pixel delivers high‑contrast visuals, reliable hardware integration, and hassle‑free content updates.</p>
+        <div class="cta">
+          <a href="#contact" class="primary">Start your project</a>
+          <a href="#work" class="ghost">See our work</a>
+        </div>
+      </div>
+      <div class="display" role="img" aria-label="Animated signage mockup">
+        <div class="mock">
+          <div class="scanline"></div>
+          <div class="ticker"><span>Announcement • New install slots available • Interactive menus • Wayfinding • Video walls • Window LEDs • </span></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Services -->
+  <section id="services" aria-labelledby="services-title">
+    <div class="wrap">
+      <h2 id="services-title">Services</h2>
+      <div class="grid">
+        <article class="card" aria-label="Design & Content">
+          <h3>Design & Content</h3>
+          <p class="muted">Brand‑aligned motion graphics, menu boards, promos, and live data layouts optimized for readability.</p>
+        </article>
+        <article class="card" aria-label="Hardware & Install">
+          <h3>Hardware & Install</h3>
+          <p class="muted">Sourcing, mounting, and cabling for single screens to multi‑panel video walls. We work with your IT and facilities teams.</p>
+        </article>
+        <article class="card" aria-label="Management">
+          <h3>Management</h3>
+          <p class="muted">Content scheduling, remote monitoring, and quick updates so your screens stay fresh and on‑brand.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section id="work" aria-labelledby="work-title">
+    <div class="wrap">
+      <h2 id="work-title">Portfolio</h2>
+      <div class="grid" role="list">
+        <div class="card">
+          <div class="thumb" role="img" aria-label="Retail window LED display">Retail Window • LED Banner</div>
+          <p class="muted" style="margin-top:10px">High‑brightness window banner driving walk‑ins.</p>
+        </div>
+        <div class="card">
+          <div class="thumb" aria-label="Corporate lobby video wall">Corporate Lobby • Video Wall</div>
+          <p class="muted" style="margin-top:10px">Immersive lobby wall with ambient motion.</p>
+        </div>
+        <div class="card">
+          <div class="thumb" aria-label="Menu board system">QSR • Menu Board System</div>
+          <p class="muted" style="margin-top:10px">Modular menu boards with day‑part scheduling.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" aria-labelledby="about-title">
+    <div class="wrap">
+      <h2 id="about-title">About Vivid Pixel</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Why us</h3>
+          <p class="muted">We combine design thinking with field‑tested installs. The result: signage that looks premium and stays reliable.</p>
+        </div>
+        <div class="card">
+          <h3>What you get</h3>
+          <p class="muted">A single partner for content, hardware, and ongoing updates. Clear timelines, clear pricing, and responsive support.</p>
+        </div>
+        <div class="card">
+          <h3>Where we work</h3>
+          <p class="muted">Retail, restaurants, offices, events, and campuses. On‑site for installs, remote for content and management.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <h2 id="contact-title">Get a fast quote</h2>
+      <p class="muted" style="margin-bottom:16px">Tell us about your project and we’ll follow up with next steps. Fields marked * are required.</p>
+      <form id="lead-form" aria-describedby="form-hint">
+        <div>
+          <label for="name">Name *</label>
+          <input id="name" name="name" autocomplete="name" required />
+        </div>
+        <div>
+          <label for="email">Email *</label>
+          <input id="email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div>
+          <label for="company">Company</label>
+          <input id="company" name="company" autocomplete="organization" />
+        </div>
+        <div>
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" />
+        </div>
+        <div>
+          <label for="project">Project Type *</label>
+          <select id="project" name="project" required>
+            <option value="">Select…</option>
+            <option>Retail window display</option>
+            <option>Menu boards</option>
+            <option>Video wall</option>
+            <option>Wayfinding</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div>
+          <label for="timeline">Timeline</label>
+          <select id="timeline" name="timeline">
+            <option>ASAP</option>
+            <option>2–4 weeks</option>
+            <option>1–3 months</option>
+            <option>Flexible</option>
+          </select>
+        </div>
+        <div class="full">
+          <label for="goals">Goals *</label>
+          <textarea id="goals" name="goals" placeholder="What are you trying to achieve?" required></textarea>
+        </div>
+        <div class="full">
+          <label for="ref">How did you hear about us?</label>
+          <input id="ref" name="ref" placeholder="Google, referral, event, etc." />
+        </div>
+        <p id="form-hint" class="hint full">This demo form validates in the browser. On GitHub Pages, connect it to a service like <a href="https://formspree.io" target="_blank" rel="noopener">Formspree</a> or <a href="https://formspark.io" target="_blank" rel="noopener">Formspark</a> (no server needed). Replace <code>handleSubmit()</code> with their endpoint.</p>
+        <div class="full">
+          <button class="submit" type="submit">Send</button>
+        </div>
+      </form>
+
+      <div class="foot">
+        <span>© <span id="year"></span> Vivid Pixel</span>
+        <span>hello@vividpixel.biz</span>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const id = a.getAttribute('href');
+        const el = document.querySelector(id);
+        if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+
+    // Simple form handling (client-side only)
+    const form = document.getElementById('lead-form');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form));
+      // TODO: Replace with a Formspree/Formspark endpoint for production.
+      alert('Thanks! This demo captured your info in the browser. On GitHub Pages, connect this form to Formspree/Formspark — I left a note above with links.');
+      form.reset();
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
