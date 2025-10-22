@@ -13,7 +13,7 @@
       --bg: #0a0a0a;
       --text: #ffffff;
       --muted: #b8c0cc;
-      --blue: #00b3ff; /* vivid accent */
+      --blue: #00b3ff;
       --card: #111214;
       --border: #252a33;
       --shadow: 0 10px 30px rgba(0,0,0,.35);
@@ -24,11 +24,41 @@
     a { color: var(--blue); text-decoration: none; }
     a:hover { text-decoration: underline; }
     .wrap { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
     /* Header */
-    header { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(8px); background: rgba(10,10,10,0.75); border-bottom: 1px solid var(--border); }
-    .nav { display:flex; align-items:center; justify-content:space-between; gap: 16px; }
-    .brand { display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.4px; }
-    .dot { width:14px; height:14px; border-radius:50%; background: var(--blue); box-shadow:0 0 18px rgba(0,179,255,.65); }
+    #site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(8px);
+      background: rgba(10,10,10,0.75);
+      border-bottom: 1px solid var(--border);
+      transition: background .25s ease, padding .25s ease, border-color .25s ease;
+      padding: 10px 0;
+    }
+    #site-header.shrink {
+      padding: 4px 0;
+      background: rgba(10,10,10,0.85);
+      border-bottom-color: rgba(255,255,255,0.08);
+    }
+
+    .nav { display:flex; align-items:center; justify-content:space-between; gap: 16px; transition: padding .25s ease; }
+
+    .brand .logo {
+      height: 48px;
+      width: auto;
+      display: block;
+      transition: transform .25s ease, filter .25s ease, height .25s ease;
+      filter: drop-shadow(0 0 6px rgba(0,179,255,0.30));
+    }
+    #site-header.shrink .brand .logo {
+      transform: scale(.84);
+      filter: drop-shadow(0 0 3px rgba(0,179,255,0.18));
+    }
+    @media (max-width: 600px) {
+      .brand .logo { height: 40px; }
+    }
+
     .nav a.btn { background: var(--blue); color:#001018; padding:10px 14px; border-radius: 999px; font-weight:700; box-shadow: 0 8px 24px rgba(0,179,255,.25); border: 1px solid rgba(255,255,255,.06); }
     .nav a.btn:hover { transform: translateY(-1px); box-shadow: 0 14px 28px rgba(0,179,255,.28); }
     .menu { display:flex; gap:18px; align-items:center; }
@@ -45,12 +75,9 @@
     .cta .primary { background: linear-gradient(135deg, var(--blue), #35d0ff); color:#001018; padding:14px 18px; border-radius:12px; border: 1px solid rgba(255,255,255,.06); font-weight:800; box-shadow: 0 10px 30px rgba(0,179,255,.35); }
     .cta .primary:hover { transform: translateY(-1px); box-shadow: 0 16px 36px rgba(0,179,255,.4); }
     .cta .ghost { background: transparent; color: var(--text); padding:14px 18px; border-radius:12px; border: 1px solid var(--border); font-weight:700; }
-    .display { background: radial-gradient(1200px 400px at 0% 0%, rgba(0,179,255,.08), transparent 60%),
-                linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0));
-               border:1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow);
-               aspect-ratio: 16/10; display:grid; place-items:center; overflow:hidden; }
-    .display .mock { width:100%; height:100%; border-radius:12px; background: conic-gradient(from 180deg at 50% 50%, #0f1f2a, #0b1320, #0f1f2a);
-                      position:relative; }
+
+    .display { background: radial-gradient(1200px 400px at 0% 0%, rgba(0,179,255,.08), transparent 60%), linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0)); border:1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); aspect-ratio: 16/10; display:grid; place-items:center; overflow:hidden; }
+    .display .mock { width:100%; height:100%; border-radius:12px; background: conic-gradient(from 180deg at 50% 50%, #0f1f2a, #0b1320, #0f1f2a); position:relative; }
     .scanline { position:absolute; inset:0; background: repeating-linear-gradient( to bottom, rgba(0,179,255,.08), rgba(0,179,255,.08) 1px, transparent 1px, transparent 3px ); mix-blend-mode:screen; opacity:.7; }
     .ticker { position:absolute; bottom:10px; left:10px; right:10px; height:36px; border-radius:8px; overflow:hidden; border:1px solid rgba(255,255,255,.08); background: rgba(0,0,0,.35); display:flex; align-items:center; }
     .ticker span { white-space:nowrap; padding-left:100%; display:inline-block; animation: scroll 18s linear infinite; color: #cfefff; font-weight:700; }
@@ -64,10 +91,8 @@
     .card h3 { margin: 0 0 8px; font-size: 18px; }
     .muted { color: var(--muted); }
 
-    /* Portfolio placeholders */
     .thumb { aspect-ratio: 16/9; border-radius: 12px; background: linear-gradient(135deg, #07131a, #0c1b26); border:1px solid var(--border); display:grid; place-items:center; color:#8fe3ff; font-weight:800; letter-spacing: .06em; }
 
-    /* Contact */
     form { display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     form .full { grid-column: 1 / -1; }
     label { display:block; font-weight:700; margin-bottom: 6px; }
@@ -77,7 +102,6 @@
     .submit { background: var(--blue); color:#001018; padding:14px 18px; border-radius:12px; border: 1px solid rgba(255,255,255,.06); font-weight:800; box-shadow: 0 10px 30px rgba(0,179,255,.35); cursor:pointer; }
     .foot { display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--border); padding-top:18px; margin-top: 28px; color: var(--muted); }
 
-    /* Responsive */
     @media (max-width: 900px) {
       .hero { grid-template-columns: 1fr; }
       .grid { grid-template-columns: 1fr; }
@@ -87,12 +111,11 @@
 </head>
 <body>
   <!-- Header -->
-  <header>
+  <header id="site-header">
     <div class="wrap nav">
-      <div class="brand" aria-label="Vivid Pixel">
-        <div class="dot" aria-hidden="true"></div>
-        <span>Vivid&nbsp;Pixel</span>
-      </div>
+      <a href="#" class="brand" aria-label="Vivid Pixel">
+        <img src="Vivid Pixel Logo 2.jpg" alt="Vivid Pixel logo" class="logo" />
+      </a>
       <nav class="menu" aria-label="Primary">
         <a href="#services">Services</a>
         <a href="#work">Portfolio</a>
@@ -108,7 +131,7 @@
       <div>
         <span class="badge"><span class="glow"></span> Digital Signage that Moves People</span>
         <h1>Design, install, and manage displays that turn attention into action.</h1>
-        <p class="sub">From retail storefronts to corporate lobbies, Vivid Pixel delivers high‑contrast visuals, reliable hardware integration, and hassle‑free content updates.</p>
+        <p class="sub">From retail storefronts to corporate lobbies, Vivid Pixel delivers high-contrast visuals, reliable hardware integration, and hassle-free content updates.</p>
         <div class="cta">
           <a href="#contact" class="primary">Start your project</a>
           <a href="#work" class="ghost">See our work</a>
@@ -130,15 +153,15 @@
       <div class="grid">
         <article class="card" aria-label="Design & Content">
           <h3>Design & Content</h3>
-          <p class="muted">Brand‑aligned motion graphics, menu boards, promos, and live data layouts optimized for readability.</p>
+          <p class="muted">Brand-aligned motion graphics, menu boards, promos, and live data layouts optimized for readability.</p>
         </article>
         <article class="card" aria-label="Hardware & Install">
           <h3>Hardware & Install</h3>
-          <p class="muted">Sourcing, mounting, and cabling for single screens to multi‑panel video walls. We work with your IT and facilities teams.</p>
+          <p class="muted">Sourcing, mounting, and cabling for single screens to multi-panel video walls. We work with your IT and facilities teams.</p>
         </article>
         <article class="card" aria-label="Management">
           <h3>Management</h3>
-          <p class="muted">Content scheduling, remote monitoring, and quick updates so your screens stay fresh and on‑brand.</p>
+          <p class="muted">Content scheduling, remote monitoring, and quick updates so your screens stay fresh and on-brand.</p>
         </article>
       </div>
     </div>
@@ -151,7 +174,7 @@
       <div class="grid" role="list">
         <div class="card">
           <div class="thumb" role="img" aria-label="Retail window LED display">Retail Window • LED Banner</div>
-          <p class="muted" style="margin-top:10px">High‑brightness window banner driving walk‑ins.</p>
+          <p class="muted" style="margin-top:10px">High-brightness window banner driving walk-ins.</p>
         </div>
         <div class="card">
           <div class="thumb" aria-label="Corporate lobby video wall">Corporate Lobby • Video Wall</div>
@@ -159,7 +182,7 @@
         </div>
         <div class="card">
           <div class="thumb" aria-label="Menu board system">QSR • Menu Board System</div>
-          <p class="muted" style="margin-top:10px">Modular menu boards with day‑part scheduling.</p>
+          <p class="muted" style="margin-top:10px">Modular menu boards with day-part scheduling.</p>
         </div>
       </div>
     </div>
@@ -172,7 +195,7 @@
       <div class="grid">
         <div class="card">
           <h3>Why us</h3>
-          <p class="muted">We combine design thinking with field‑tested installs. The result: signage that looks premium and stays reliable.</p>
+          <p class="muted">We combine design thinking with field-tested installs. The result: signage that looks premium and stays reliable.</p>
         </div>
         <div class="card">
           <h3>What you get</h3>
@@ -180,7 +203,7 @@
         </div>
         <div class="card">
           <h3>Where we work</h3>
-          <p class="muted">Retail, restaurants, offices, events, and campuses. On‑site for installs, remote for content and management.</p>
+          <p class="muted">Retail, restaurants, offices, events, and campuses. On-site for installs, remote for content and management.</p>
         </div>
       </div>
     </div>
@@ -236,7 +259,7 @@
           <label for="ref">How did you hear about us?</label>
           <input id="ref" name="ref" placeholder="Google, referral, event, etc." />
         </div>
-        <p id="form-hint" class="hint full">This demo form validates in the browser. On GitHub Pages, connect it to a service like <a href="https://formspree.io" target="_blank" rel="noopener">Formspree</a> or <a href="https://formspark.io" target="_blank" rel="noopener">Formspark</a> (no server needed). Replace <code>handleSubmit()</code> with their endpoint.</p>
+        <p id="form-hint" class="hint full">This demo form validates in the browser. On GitHub Pages, connect it to a service like <a href="https://formspree.io" target="_blank" rel="noopener">Formspree</a> or <a href="https://formspark.io" target="_blank" rel="noopener">Formspark</a>.</p>
         <div class="full">
           <button class="submit" type="submit">Send</button>
         </div>
@@ -251,25 +274,4 @@
 
   <script>
     // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', (e) => {
-        const id = a.getAttribute('href');
-        const el = document.querySelector(id);
-        if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-      });
-    });
-
-    // Simple form handling (client-side only)
-    const form = document.getElementById('lead-form');
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const data = Object.fromEntries(new FormData(form));
-      // TODO: Replace with a Formspree/Formspark endpoint for production.
-      alert('Thanks! This demo captured your info in the browser. On GitHub Pages, connect this form to Formspree/Formspark — I left a note above with links.');
-      form.reset();
-    });
-
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
-</body>
-</html>
+    document.query
