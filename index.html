@@ -25,6 +25,9 @@
     a:hover { text-decoration: underline; }
     .wrap { max-width: 1200px; margin: 0 auto; padding: 24px; }
 
+    /* Make anchor jumps account for sticky header height */
+    html { scroll-behavior: smooth; scroll-padding-top: 140px; }
+
     /* Header */
     #site-header {
       position: sticky;
@@ -34,34 +37,332 @@
       background: rgba(10,10,10,0.75);
       border-bottom: 1px solid var(--border);
       transition: background .25s ease, padding .25s ease, border-color .25s ease;
-      padding: 10px 0;
+      padding: 12px 0;
     }
     #site-header.shrink {
-      padding: 4px 0;
+      padding: 6px 0;
       background: rgba(10,10,10,0.85);
       border-bottom-color: rgba(255,255,255,0.08);
     }
 
-    .nav { display:flex; align-items:center; justify-content:space-between; gap: 16px; transition: padding .25s ease; }
+    .nav { display:flex; align-items:center; justify-content:space-between; gap: 24px; transition: padding .25s ease; }
 
-    /* Logo - enlarged 3x */
     .brand .logo {
-      height: 144px; /* was 48px */
+      height: 144px; /* ~3x original */
       width: auto;
       display: block;
-      transition: transform .25s ease, filter .25s ease, height .25s ease;
+      transition: filter .25s ease, height .25s ease;
       filter: drop-shadow(0 0 6px rgba(0,179,255,0.30));
     }
+    /* On scroll, shrink to a compact height for more reading space */
     #site-header.shrink .brand .logo {
-      transform: scale(.84);
+      height: 56px;
       filter: drop-shadow(0 0 3px rgba(0,179,255,0.18));
     }
+
+    /* Primary menu */
+    .menu { display:flex; gap:22px; align-items:center; flex-wrap:wrap; }
+    .menu a { color: var(--muted); font-weight:600; padding: 10px 0; }
+    .menu a.active, .menu a:hover { color: var(--text); }
+
+    .nav a.btn {
+      background: var(--blue); color:#001018;
+      padding:10px 14px; border-radius: 999px; font-weight:700;
+      box-shadow: 0 8px 24px rgba(0,179,255,.25); border: 1px solid rgba(255,255,255,.06);
+      white-space: nowrap;
+    }
+    .nav a.btn:hover { transform: translateY(-1px); box-shadow: 0 14px 28px rgba(0,179,255,.28); }
+
+    /* Hamburger (hidden on desktop) */
+    .hamburger {
+      display:none;
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      line-height: 0;
+      cursor: pointer;
+    }
+    .hamburger:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+    .hamburger svg { width: 22px; height: 22px; }
+
+    @media (max-width: 900px) {
+      .nav { gap: 12px; }
+      .hamburger { display: inline-flex; align-items:center; justify-content:center; }
+      /* Collapse the menu into a vertical drawer below the header bar */
+      .menu {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        padding: 8px 0 0;
+      }
+      .menu[data-open="true"] { display: flex; }
+      .menu a { padding: 10px 2px; }
+    }
     @media (max-width: 600px) {
-      .brand .logo { height: 120px; } /* was 40px */
+      .brand .logo { height: 110px; } /* cap on small phones */
+    }
+    @media (max-width: 400px) {
+      .brand .logo { height: 84px; }  /* extra cap on very small phones */
     }
 
-    .nav a.btn { background: var(--blue); color:#001018; padding:10px 14px; border-radius: 999px; font-weight:700; box-shadow: 0 8px 24px rgba(0,179,255,.25); border: 1px solid rgba(255,255,255,.06); }
-    .nav a.btn:hover { transform: translateY(-1px); box-shadow: 0 14px 28px rgba(0,179,255,.28); }
-    .menu { display:flex; gap:18px; align-items:center; }
-    .menu a { color: var(--muted); font-weight:600; }
-    .menu a.active, .menu a:hover { color: var(--text); }
+    /* Hero */
+    .hero { display:grid; grid-template-columns: 1.1fr .9fr; gap: 32px; align-items:center; padding: 56px 0 28px; }
+    .badge { display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border:1px solid var(--border); border-radius:999px; color: var(--muted); }
+    .badge .glow { width:8px; height:8px; border-radius:50%; background: var(--blue); box-shadow: 0 0 10px rgba(0,179,255,.9); }
+    h1 { font-size: clamp(34px, 5vw, 64px); line-height: 1.05; margin: 14px 0 12px; font-weight: 800; }
+    .sub { color: var(--muted); font-size: clamp(16px, 2vw, 20px); max-width: 56ch; }
+    .cta { display:flex; gap:12px; margin-top: 22px; }
+    .cta .primary { background: linear-gradient(135deg, var(--blue), #35d0ff); color:#001018; padding:14px 18px; border-radius:12px; border: 1px solid rgba(255,255,255,.06); font-weight:800; box-shadow: 0 10px 30px rgba(0,179,255,.35); }
+    .cta .primary:hover { transform: translateY(-1px); box-shadow: 0 16px 36px rgba(0,179,255,.4); }
+    .cta .ghost { background: transparent; color: var(--text); padding:14px 18px; border-radius:12px; border: 1px solid var(--border); font-weight:700; }
+
+    .display { background: radial-gradient(1200px 400px at 0% 0%, rgba(0,179,255,.08), transparent 60%), linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0)); border:1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); aspect-ratio: 16/10; display:grid; place-items:center; overflow:hidden; }
+    .display .mock { width:100%; height:100%; border-radius:12px; background: conic-gradient(from 180deg at 50% 50%, #0f1f2a, #0b1320, #0f1f2a); position:relative; }
+    .scanline { position:absolute; inset:0; background: repeating-linear-gradient( to bottom, rgba(0,179,255,.08), rgba(0,179,255,.08) 1px, transparent 1px, transparent 3px ); mix-blend-mode:screen; opacity:.7; }
+    .ticker { position:absolute; bottom:10px; left:10px; right:10px; height:36px; border-radius:8px; overflow:hidden; border:1px solid rgba(255,255,255,.08); background: rgba(0,0,0,.35); display:flex; align-items:center; }
+    .ticker span { white-space:nowrap; padding-left:100%; display:inline-block; animation: scroll 18s linear infinite; color: #cfefff; font-weight:700; }
+    @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+
+    /* Sections */
+    section { padding: 56px 0; border-top: 1px solid var(--border); }
+    h2 { font-size: clamp(24px, 3.2vw, 36px); margin: 0 0 18px; }
+    .grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card { background: var(--card); border:1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .card h3 { margin: 0 0 8px; font-size: 18px; }
+    .muted { color: var(--muted); }
+
+    .thumb { aspect-ratio: 16/9; border-radius: 12px; background: linear-gradient(135deg, #07131a, #0c1b26); border:1px solid var(--border); display:grid; place-items:center; color:#8fe3ff; font-weight:800; letter-spacing: .06em; }
+
+    form { display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    form .full { grid-column: 1 / -1; }
+    label { display:block; font-weight:700; margin-bottom: 6px; }
+    input, select, textarea { width:100%; background:#0b0c0f; color:var(--text); border:1px solid var(--border); border-radius: 12px; padding: 12px 12px; font-size: 16px; }
+    textarea { min-height: 120px; }
+    .hint { font-size: 12px; color: var(--muted); margin-top: 6px; }
+    .submit { background: var(--blue); color:#001018; padding:14px 18px; border-radius:12px; border: 1px solid rgba(255,255,255,.06); font-weight:800; box-shadow: 0 10px 30px rgba(0,179,255,.35); cursor:pointer; }
+    .foot { display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--border); padding-top:18px; margin-top: 28px; color: var(--muted); }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      form { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header id="site-header">
+    <div class="wrap nav">
+      <a href="#" class="brand" aria-label="Vivid Pixel">
+        <img src="Vivid Pixel Logo 2.jpg" alt="Vivid Pixel logo" class="logo" />
+      </a>
+
+      <!-- Mobile menu toggle -->
+      <button class="hamburger" id="menu-toggle" aria-label="Toggle menu" aria-controls="primary-menu" aria-expanded="false">
+        <!-- icon: 3 lines -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <nav id="primary-menu" class="menu" aria-label="Primary" data-open="false">
+        <a href="#services">Services</a>
+        <a href="#work">Portfolio</a>
+        <a href="#about">About</a>
+        <a href="#contact" class="btn">Get a Quote</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <div class="wrap">
+    <section class="hero" aria-label="Hero">
+      <div>
+        <span class="badge"><span class="glow"></span> Digital Signage that Moves People</span>
+        <h1>Design, install, and manage displays that turn attention into action.</h1>
+        <p class="sub">From retail storefronts to corporate lobbies, Vivid Pixel delivers high-contrast visuals, reliable hardware integration, and hassle-free content updates.</p>
+        <div class="cta">
+          <a href="#contact" class="primary">Start your project</a>
+          <a href="#work" class="ghost">See our work</a>
+        </div>
+      </div>
+      <div class="display" role="img" aria-label="Animated signage mockup">
+        <div class="mock">
+          <div class="scanline"></div>
+          <div class="ticker"><span>Announcement • New install slots available • Interactive menus • Wayfinding • Video walls • Window LEDs • </span></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Services -->
+  <section id="services" aria-labelledby="services-title">
+    <div class="wrap">
+      <h2 id="services-title">Services</h2>
+      <div class="grid">
+        <article class="card" aria-label="Design & Content">
+          <h3>Design & Content</h3>
+          <p class="muted">Brand-aligned motion graphics, menu boards, promos, and live data layouts optimized for readability.</p>
+        </article>
+        <article class="card" aria-label="Hardware & Install">
+          <h3>Hardware & Install</h3>
+          <p class="muted">Sourcing, mounting, and cabling for single screens to multi-panel video walls. We work with your IT and facilities teams.</p>
+        </article>
+        <article class="card" aria-label="Management">
+          <h3>Management</h3>
+          <p class="muted">Content scheduling, remote monitoring, and quick updates so your screens stay fresh and on-brand.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section id="work" aria-labelledby="work-title">
+    <div class="wrap">
+      <h2 id="work-title">Portfolio</h2>
+      <div class="grid" role="list">
+        <div class="card">
+          <div class="thumb" role="img" aria-label="Retail window LED display">Retail Window • LED Banner</div>
+          <p class="muted" style="margin-top:10px">High-brightness window banner driving walk-ins.</p>
+        </div>
+        <div class="card">
+          <div class="thumb" aria-label="Corporate lobby video wall">Corporate Lobby • Video Wall</div>
+          <p class="muted" style="margin-top:10px">Immersive lobby wall with ambient motion.</p>
+        </div>
+        <div class="card">
+          <div class="thumb" aria-label="Menu board system">QSR • Menu Board System</div>
+          <p class="muted" style="margin-top:10px">Modular menu boards with day-part scheduling.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" aria-labelledby="about-title">
+    <div class="wrap">
+      <h2 id="about-title">About Vivid Pixel</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Why us</h3>
+          <p class="muted">We combine design thinking with field-tested installs. The result: signage that looks premium and stays reliable.</p>
+        </div>
+        <div class="card">
+          <h3>What you get</h3>
+          <p class="muted">A single partner for content, hardware, and ongoing updates. Clear timelines, clear pricing, and responsive support.</p>
+        </div>
+        <div class="card">
+          <h3>Where we work</h3>
+          <p class="muted">Retail, restaurants, offices, events, and campuses. On-site for installs, remote for content and management.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <h2 id="contact-title">Get a fast quote</h2>
+      <p class="muted" style="margin-bottom:16px">Tell us about your project and we’ll follow up with next steps. Fields marked * are required.</p>
+      <form id="lead-form" aria-describedby="form-hint">
+        <div>
+          <label for="name">Name *</label>
+          <input id="name" name="name" autocomplete="name" required />
+        </div>
+        <div>
+          <label for="email">Email *</label>
+          <input id="email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div>
+          <label for="company">Company</label>
+          <input id="company" name="company" autocomplete="organization" />
+        </div>
+        <div>
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" />
+        </div>
+        <div>
+          <label for="project">Project Type *</label>
+          <select id="project" name="project" required>
+            <option value="">Select…</option>
+            <option>Retail window display</option>
+            <option>Menu boards</option>
+            <option>Video wall</option>
+            <option>Wayfinding</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div>
+          <label for="timeline">Timeline</label>
+          <select id="timeline" name="timeline">
+            <option>ASAP</option>
+            <option>2–4 weeks</option>
+            <option>1–3 months</option>
+            <option>Flexible</option>
+          </select>
+        </div>
+        <div class="full">
+          <label for="goals">Goals *</label>
+          <textarea id="goals" name="goals" placeholder="What are you trying to achieve?" required></textarea>
+        </div>
+        <div class="full">
+          <label for="ref">How did you hear about us?</label>
+          <input id="ref" name="ref" placeholder="Google, referral, event, etc." />
+        </div>
+        <p id="form-hint" class="hint full">This demo form validates in the browser. On GitHub Pages, connect it to a service like <a href="https://formspree.io" target="_blank" rel="noopener">Formspree</a> or <a href="https://formspark.io" target="_blank" rel="noopener">Formspark</a>.</p>
+        <div class="full">
+          <button class="submit" type="submit">Send</button>
+        </div>
+      </form>
+
+      <div class="foot">
+        <span>© <span id="year"></span> Vivid Pixel</span>
+        <span>hello@vividpixel.biz</span>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Header shrink on scroll
+    const header = document.getElementById('site-header');
+    const onScroll = () => {
+      if (window.scrollY > 20) header.classList.add('shrink');
+      else header.classList.remove('shrink');
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Mobile menu toggle
+    const toggleBtn = document.getElementById('menu-toggle');
+    const menu = document.getElementById('primary-menu');
+
+    function setMenu(open) {
+      menu.dataset.open = String(open);
+      toggleBtn.setAttribute('aria-expanded', String(open));
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      const open = menu.dataset.open === 'true';
+      setMenu(!open);
+    });
+
+    // Close menu when a link is clicked (use event delegation)
+    menu.addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      if (!link) return;
+      setMenu(false);
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setMenu(false);
+    });
+
+    // Current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
