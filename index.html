@@ -1,102 +1,137 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vivid Pixel</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-        header { display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; background: #000; }
-        .site-logo { height: 50px; }
-        nav a { color: #fff; margin: 0 10px; text-decoration: none; font-weight: bold; }
-        .hero { background: url('assets/images/hero-menu-board.jpg') center/cover no-repeat; color: #fff; text-align: center; padding: 100px 20px; }
-        .hero h1 { font-size: 3em; margin-bottom: 20px; }
-        .hero p { font-size: 1.2em; margin-bottom: 30px; }
-        .hero .cta-buttons a { display: inline-block; margin: 10px; padding: 10px 20px; background: #007BFF; color: #fff; text-decoration: none; border-radius: 5px; }
-        section { padding: 50px 20px; }
-        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .portfolio-item img { width: 100%; height: auto; border-radius: 8px; }
-        footer { text-align: center; padding: 20px; background: #000; color: #fff; }
-    </style>
+    <meta name="description" content="Vivid Pixel — Digital Signage solutions for retail, restaurants, and corporate spaces.">
+    <title>Vivid Pixel — Digital Signage</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
+
+    <!-- Header -->
     <header>
-        <img src="assets/images/logo.png" alt="Vivid Pixel Logo" class="site-logo">
         <nav>
-            <a href="#services">Services</a>
-            <a href="#work">Portfolio</a>
-            <a href="#about">About</a>
-            <a href="#contact">Get a Quote</a>
+            <a href="#hero"><img src="assets/images/logo.jpg" alt="Vivid Pixel Logo"></a>
+            <ul>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Get a Quote</a></li>
+            </ul>
         </nav>
     </header>
 
-    <section class="hero">
-        <h1>High-Impact Digital Signage</h1>
-        <p>From retail storefronts to corporate lobbies, Vivid Pixel delivers high-contrast visuals and hassle-free updates.</p>
-        <div class="cta-buttons">
-            <a href="#services">Our Services</a>
-            <a href="#contact">Get a Quote</a>
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <img src="assets/images/hero-menu-board.png" alt="Digital signage menu board in restaurant">
+        <div class="hero-text">
+            <h1>Digital Signage that Moves People</h1>
+            <p>Design, install, and manage displays that turn attention into action.</p>
+            <a href="#contact">Start Your Project</a>
+            <a href="#portfolio">See Our Work</a>
         </div>
     </section>
 
-    <section id="services">
-        <h2>Services</h2>
-        <p>Brand-aligned motion graphics, menu boards, promos, and live data layouts optimized for readability.</p>
-        <p>Sourcing, mounting, and cabling for single screens to multi-panel video walls. We work with your IT and facilities teams.</p>
-        <p>Content scheduling, remote monitoring, and quick updates so your screens stay fresh and on-brand.</p>
+    <!-- Announcement Bar -->
+    <section class="announcement">
+        <p>Announcement • New install slots available • Interactive menus • Wayfinding • Video walls • Window LEDs •</p>
     </section>
 
-    <section id="work" class="portfolio">
-        <h2>Portfolio</h2>
-        <div class="portfolio-grid">
+    <!-- Services -->
+    <main>
+        <section id="services">
+            <h2>Services</h2>
+            <div class="service">
+                <h3>Design & Content</h3>
+                <p>Brand-aligned motion graphics, menu boards, promos, and live data layouts optimized for readability.</p>
+                <img src="assets/images/work-qsr-menu.png" alt="Quick Service Restaurant menu board">
+            </div>
+            <div class="service">
+                <h3>Hardware & Install</h3>
+                <p>Sourcing, mounting, and cabling for single screens to multi-panel video walls. We work with your IT and facilities teams.</p>
+            </div>
+            <div class="service">
+                <h3>Management</h3>
+                <p>Content scheduling, remote monitoring, and quick updates so your screens stay fresh and on-brand.</p>
+            </div>
+        </section>
+
+        <!-- Portfolio -->
+        <section id="portfolio">
+            <h2>Portfolio</h2>
             <div class="portfolio-item">
-                <img src="assets/images/retail-window.jpg" alt="Retail Window LED Banner">
+                <img src="assets/images/work-retail-store.png" alt="Retail store LED banner display">
+                <h4>Retail Window • LED Banner</h4>
                 <p>High-brightness window banner driving walk-ins.</p>
             </div>
             <div class="portfolio-item">
-                <img src="assets/images/corporate-lobby.jpg" alt="Corporate Lobby Video Wall">
+                <img src="assets/images/work-corporate-lobby.png" alt="Corporate lobby video wall installation">
+                <h4>Corporate Lobby • Video Wall</h4>
                 <p>Immersive lobby wall with ambient motion.</p>
             </div>
-            <div class="portfolio-item">
-                <img src="assets/images/qsr-menu-board.jpg" alt="QSR Menu Board System">
-                <p>Modular menu boards with day-part scheduling.</p>
-            </div>
-            <div class="portfolio-item">
-                <img src="assets/images/salon-display.jpg" alt="Salon Display">
-                <p>Elegant salon display for promotions and branding.</p>
-            </div>
-            <div class="portfolio-item">
-                <img src="assets/images/fitness-display.jpg" alt="Fitness Center Display">
-                <p>Dynamic fitness center signage for engagement.</p>
-            </div>
-            <div class="portfolio-item">
-                <img src="assets/images/apparel-display.jpg" alt="Apparel Store Display">
-                <p>Premium apparel store signage for visual impact.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="about">
-        <h2>About Us</h2>
-        <p>We combine design thinking with field-tested installs. The result: signage that looks premium and stays reliable.</p>
-        <p>A single partner for content, hardware, and ongoing updates. Clear timelines, clear pricing, and responsive support.</p>
-        <p>Retail, restaurants, offices, events, and campuses. On-site for installs, remote for content and management.</p>
-    </section>
+        <!-- About -->
+        <section id="about">
+            <h2>About Vivid Pixel</h2>
+            <h3>Why Us</h3>
+            <p>We combine design thinking with field-tested installs. The result: signage that looks premium and stays reliable.</p>
+            <h3>What You Get</h3>
+            <p>A single partner for content, hardware, and ongoing updates. Clear timelines, clear pricing, and responsive support.</p>
+            <h3>Where We Work</h3>
+            <p>Retail, restaurants, offices, events, and campuses. On-site for installs, remote for content and management.</p>
+        </section>
 
-    <section id="contact">
-        <h2>Get a Quote</h2>
-        <p>Tell us about your project and we’ll follow up with next steps. Fields marked * are required.</p>
-        <form>
-            <input type="text" placeholder="Name*" required>
-            <input type="email" placeholder="Email*" required>
-            <textarea placeholder="Project Details" required></textarea>
-            <button type="submit">Submit</button>
-        </form>
-    </section>
+        <!-- Contact Form -->
+        <section id="contact">
+            <h2>Get a Fast Quote</h2>
+            <form>
+                <label for="name">Name *</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="company">Company</label>
+                <input type="text" id="company" name="company">
+                
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone">
+                
+                <label for="project-type">Project Type *</label>
+                <select id="project-type" name="project-type" required>
+                    <option value="">Select…</option>
+                    <option>Retail window display</option>
+                    <option>Menu boards</option>
+                    <option>Video wall</option>
+                    <option>Wayfinding</option>
+                    <option>Other</option>
+                </select>
+                
+                <label for="timeline">Timeline</label>
+                <select id="timeline" name="timeline">
+                    <option>ASAP</option>
+                    <option>2–4 weeks</option>
+                    <option>1–3 months</option>
+                    <option>Flexible</option>
+                </select>
+                
+                <label for="goals">Goals *</label>
+                <textarea id="goals" name="goals" required></textarea>
+                
+                <label for="referral">How did you hear about us?</label>
+                <input type="text" id="referral" name="referral">
+                
+                <button type="submit">Send</button>
+            </form>
+        </section>
+    </main>
 
-    <footer>
-        <p>Contact us: info@vividpixel.biz</p>
-        <p>&copy; 2025 Vivid Pixel</p>
+    <!-- Footer -->
+       <footer>
+        <p>© Vivid Pixel | hello@vividpixel.biz</p>
     </footer>
+
 </body>
-</html>
