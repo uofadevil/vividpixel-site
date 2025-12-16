@@ -128,13 +128,13 @@ input, select, textarea, button {
 }
 
 button {
-       background: #0073e6;
+    background: #0073e6;
     color: #fff;
     border: none;
     cursor: pointer;
 }
 
-/* Footer */
+/*/* Footer */
 .site-footer {
     text-align: center;
     padding: 1rem;
