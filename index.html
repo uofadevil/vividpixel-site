@@ -2,101 +2,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vivid Pixel — Digital Signage</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vivid Pixel — Digital Signage</title>
+  <meta name="description" content="Design, install, and manage digital signage that turns attention into action." />
+  <!-- Using your uploaded brand mark as favicon -->
+  <link rel="icon"go.jpg
+  <style>
+    :root { --bg: #0b0b0f; --text: #f5f7fa; --muted: #b8c0cc; --accent: #57c7ff; }
+    html, body { margin:0; padding:0; background:var(--bg); color:var(--text); font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans"; }
+    a { color: var(--accent); text-decoration: none; }
+    header, nav, main, footer { max-width: 1100px; margin: 0 auto; padding: 1rem; }
+    nav { display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
+    nav .spacer { flex:1 1 auto; }
+    .logo { height: 40px; width:auto; border-radius:6px; }
+    .hero { display:grid; grid-template-columns: 1fr; gap:1.25rem; align-items:center; }
+    .hero-media { border-radius:12px; overflow:hidden; }
+    .hero-media img { width:100%; height:auto; display:block; }
+    .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+    .card { background:#12121a; border:1px solid #222432; border-radius:12px; overflow:hidden; }
+    .card img { width:100%; height:auto; display:block; }
+    .card .content { padding:1rem; }
+    .muted { color: var(--muted); }
+    form { display:grid; gap:.75rem; max-width:720px; }
+    input, select, textarea, button { padding:.75rem; border-radius:8px; border:1px solid #2a2d3a; background:#0f1016; color:var(--text); }
+    button { background:var(--accent); color:#04131a; border:none; font-weight:600; cursor:pointer; }
+    footer { font-size:.9rem; color: var(--muted); }
+    @media (min-width: 900px) { .hero { grid-template-columns: 1fr 1fr; } }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <img src="assets/images/logo.jpg" alt="Vivid Pixel Logo" style="height:60px;">
-        <nav>
-            <a href="#services">Services</a>
-            <a href="#work">Portfolio</a>
-            <a href="#about">About</a>
-            <a href="#contact">Get a Quote</a>
-        </nav>
-    </header>
+  <header>
+    <nav aria-label="Primary">
+      <a href="#" class="brand" aria-label=" </a>
+      <div class="spacer"></div>
+      #servicesServices</a>
+      #workPortfolio</a>
+      #aboutAbout</a>
+      #contactGet a Quote</a>
+    </nav>
+  </header>
 
-    <!-- Hero Section -->
-    <section>
-        <img src="assets/images/hero-menu-board.png" alt="Hero Menu Board" style="width:100%; height:auto;">
-        <h1>Digital Signage that Moves People</h1>
-        <h2>Design, install, and manage displays that turn attention into action.</h2>
-        <p>From retail storefronts to corporate lobbies, Vivid Pixel delivers high-contrast visuals, reliable hardware integration, and hassle-free content updates.</p>
-        <a href="#contact">Start your project</a>
-        <a href="#work">See our work</a>
-    </section>
+  <main>
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div>
+        <h1 id="hero-title">Digital Signage that Moves People</h1>
+        <p class="muted">Design, install, and manage displays that turn attention into action.</p>
+        <p class="muted">From retail storefronts to corporate lobbies, Vivid Pixel delivers high-contrast visuals, reliable hardware integration, and hassle-free content updates.</p>
+        <p>
+          #contactStart your project</a> ·
+          #workSee our work</a>
+        </p>
+        <p class="muted" aria-live="polite">Announcement • New install slots available • Interactive menus • Wayfinding • Video walls • Window LEDs •</p>
+      </div>
+      <div class="hero-media">
+        <img src="assets/images/hero-menu-board.png"
+             alt="Vivid Pixel menu board system in a id="services" aria-labelledby="services-title">
+      <h2 id="services-title">Services</h2>
+      <div class="grid">
+        <article class="card" aria-labelledby="svc-design">
+          <img src="assets/images/work-burgers.png"
+               alt="Digital signage showcasing food imagery and pricing"
+               loading="lazy" decodingnd-aligned motion graphics, menu boards, promos, and live data layouts optimized for readability.</p>
+          </div>
+        </article>
 
-    <!-- Announcement -->
-    <div>
-        <p>Announcement • New install slots available • Interactive menus • Wayfinding • Video walls • Window LEDs •</p>
-    </div>
+        <article class="card" aria-labelledby="svc-hardware">
+          assets/images/work-qsr-menu.png
+          <div class="content">
+            <h3 id="svc-hardware">Hardware &amp; Install</h3>
+            <p class="muted">Sourcing, mounting, and cabling for single screens to multi-panel video walls. We work with your IT and facilities teams.</p>
+          </div>
+        </article>
 
-    <!-- Services -->
-    <section id="services">
-        <h2>Services</h2>
-        <h3>Design & Content</h3>
-        <p>Brand-aligned motion graphics, menu boards, promos, and live data layouts optimized for readability.</p>
-        <h3>Hardware & Install</h3>
-        <p>Sourcing, mounting, and cabling for single screens to multi-panel video walls. We work with your IT and facilities teams.</p>
-        <h3>Management</h3>
-        <p>Content scheduling, remote monitoring, and quick updates so your screens stay fresh and on-brand.</p>
+        <article class="card" aria-labelledby="svc-management">
+          <img src="assets/images/work-corporate-lobby.png"
+               alt="Lobby display with Vivid Pixel brand visuals"
+               loading="lazy" decoding="ent scheduling, remote monitoring, and quick updates so your screens stay fresh and on-brand.</p>
+          </div>
+        </article>
+      </div>
     </section>
 
     <!-- Portfolio -->
-    <section id="work">
-        <h2>Our Work</h2>
-        <div>
-            <img src="assets/images/work-retail-store.png" alt="Retail Store Work" style="width:100%; max-width:400px;">
-            <img src="assets/images/work-corporate-lobby.png" alt="Corporate Lobby Work" style="width:100%; max-width:400px;">
-            <img src="assets/images/work-qsr-menu.png" alt="QSR Menu Work" style="width:100%; max-width:400px;">
-        </div>
+    <section id="work" aria-labelledby="work-title">
+      <h2 id="work-title">Portfolio</h2>
+      <div class="grid">
+        <article class="card" aria-labelledby="work-retail">
+          <img src="assets/images/work-retail-store.png"
+               alt="Retail store display drawing shopper attention"
+               loading="lazy" decoding="async">High-brightness window banner driving walk-ins.</p>
+          </div>
+        </article>
+
+        <article class="card" aria-labelledby="work-lobby">
+          <img src="assets/images/work-corporate-lobby.png"
+               alt="Corporate lobby wall integrating signage intobby • Video Wall</h3>
+            <p class="muted">Immersive lobby wall with ambient motion.</p>
+          </div>
+        </article>
+
+        <article class="card" aria-labelledby="work-salon">
+          <img src="assets/images/work-salon.png"
+               alt="Salon environmentid="work-salon">Salon • Brand Display</h3>
+            <p class="muted">Clean, modern installations suited for service environments.</p>
+          </div>
+        </article>
+      </div>
     </section>
 
     <!-- About -->
-    <section id="about">
-        <h2>About Vivid Pixel</h2>
-        <h3>Why us</h3>
-        <p>We combine design thinking with field-tested installs. The result: signage that looks premium and stays reliable.</p>
-        <h3>What you get</h3>
-        <p>A single partner for content, hardware, and ongoing updates. Clear timelines, clear pricing, and responsive support.</p>
-        <h3>Where we work</h3>
-        <p>Retail, restaurants, offices, events, and campuses. On-site for installs, remote for content and management.</p>
+    <section id="about" aria-labelledby="about-title">
+      <h2 id="about-title">About Vivid Pixel</h2>
+      <div class="grid">
+        <article class="card" aria-labelledby="why-us">
+          <img src="assets/images/work-burgers.png"
+               alt="Premium visuals with reliable hardware in food service"
+              We combine design thinking with field-tested installs. The result: signage that looks premium and stays reliable.</p>
+          </div>
+        </article>
+
+        <article class="card" aria-labelledby="what-you-get">
+          <img src="assets/images/work-retail-store.png"
+               alt="Teamwork and content planning reflected in retail deployment"
+               loadingsingle partner for content, hardware, and ongoing updates. Clear timelines, clear pricing, and responsive support.</p>
+          </div>
+        </article>
+
+        <article class="card" aria-labelledby="where-we-work">
+          <img src="assets/images/work-corporate-lobby.png"
+               alt="Office, retail, and campus-ready signage solutions"
+               loadings="muted">Retail, restaurants, offices, events, and campuses. On-site for installs, remote for content and management.</p>
+          </div>
+        </article>
+      </div>
     </section>
 
     <!-- Contact -->
-    <section id="contact">
-        <h2>Get a fast quote</h2>
-        <form>
-            <label>Name *</label><input type="text" required>
-            <label>Email *</label><input type="email" required>
-            <label>Company</label><input type="text">
-            <label>Phone</label><input type="tel">
-            <label>Project Type *</label>
-            <select required>
-                <option>Select…</option>
-                <option>Retail window display</option>
-                <option>Menu boards</option>
-                <option>Video wall</option>
-                <option>Wayfinding</option>
-                <option>Other</option>
-            </select>
-            <label>Timeline</label>
-            <select>
-                <option>ASAP</option>
-                <option>2–4 weeks</option>
-                <option>1–3 months</option>
-                <option>Flexible</option>
-            </select>
-            <label>Goals *</label><textarea required></textarea>
-            <button type="submit">Send</button>
-        </form>
+    <section id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">Get a fast quote</h2>
+      <p class="muted">Tell us about your project and we’ll follow up with next steps. Fields marked * are required.</p>
+      #
+        <label>Name *<br><input type="text" name="name" required aria-required="true" autocomplete="name" /></label>
+        <label>Email *<br><input type="email" name="email" required aria-required="true" autocomplete="email" /></label>
+        <label>Company<br><input type="text" name="company" autocomplete="organization" /></label>
+        <label>Phone<br><input type="tel" name="phone" autocomplete="tel" /></label>
+        <label>Project Type *<br>
+          <select name="project" required aria-required="true">
+            <option value="" selected disabled>Select…</option>
+            <option>Retail window display</option>
+            <option>Menu boards</option>
+            <option>Video wall</option>
+            <option>Wayfinding</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <label>Timeline<br>
+          <select name="timeline">
+            <option>ASAP</option>
+            <option>2–4 weeks</option>
+            <option>1–3 months</option>
+            <option>Flexible</option>
+          </select>
+        </label>
+        <label>Goals *<br><textarea name="goals" rows="4" required aria-required="true"></textarea></label>
+        <label>How did you hear about us?<br><input type="text" name="referrer" /></label>
+        <p class="muted">This demo form validates in the browser. On GitHub Pages, connect it to a service like
+          <a href="https://formsprmspree</a> or
+          https://formspark.io/Formspark</a>.
+        </p>
+        <button type="submit">Send</button>
+      </form>
     </section>
+  </main>
 
-       <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Vivid Pixel | hello@vividpixel.biz</p>
-    </footer>
+  <footer>
+    <p>© Vivid Pixel · <a href="llo@vividpixel.bizhello@vividpixel.biz</a></p>
+  </footer>
 </body>
 
