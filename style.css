@@ -324,21 +324,6 @@ nav.main-nav a.nav-link[aria-current="page"] { color: var(--white); }
 }
 .slide p { color: rgba(243,246,250,0.75); margin: 0; font-size: 0.9rem; }
 
-.screen-progress {
-  height: 3px;
-  background: var(--border);
-  border-radius: 3px;
-  margin-top: 12px;
-  overflow: hidden;
-}
-.screen-progress-bar {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, var(--blue-light), var(--blue-deep));
-}
-.screen-progress-bar.animate { animation: fillbar 4s linear; }
-@keyframes fillbar { from { width: 0%; } to { width: 100%; } }
-
 .mockup-caption {
   text-align: center;
   font-family: var(--font-mono);
