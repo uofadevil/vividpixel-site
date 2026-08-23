@@ -308,6 +308,11 @@ nav.main-nav a.nav-link[aria-current="page"] { color: var(--white); }
 }
 .slide.active { opacity: 1; transform: scale(1); }
 
+/* Only the visible slide should be clickable — otherwise the last slide
+   in the HTML always sits on top and swallows clicks meant for others. */
+.slide { pointer-events: none; }
+.slide.active { pointer-events: auto; }
+
 .slide .tag {
   font-family: var(--font-mono);
   font-size: 0.68rem;
