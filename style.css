@@ -324,6 +324,19 @@ nav.main-nav a.nav-link[aria-current="page"] { color: var(--white); }
 }
 .slide p { color: rgba(243,246,250,0.75); margin: 0; font-size: 0.9rem; }
 
+/* Image slides (real signage example photos) fill the frame edge-to-edge,
+   cropping to cover rather than being padded/inset like text slides. */
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+.screen.image-screen .slide {
+  padding: 0;
+}
+
 .mockup-caption {
   text-align: center;
   font-family: var(--font-mono);
