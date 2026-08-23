@@ -337,6 +337,14 @@ nav.main-nav a.nav-link[aria-current="page"] { color: var(--white); }
   padding: 0;
 }
 
+.slide img.lightbox-trigger {
+  cursor: zoom-in;
+  transition: filter 0.2s ease;
+}
+.slide img.lightbox-trigger:hover {
+  filter: brightness(1.08);
+}
+
 .mockup-caption {
   text-align: center;
   font-family: var(--font-mono);
@@ -580,3 +588,61 @@ form.quote-form {
 
 .story p { font-size: 1rem; }
 .story p:last-child { margin-bottom: 0; }
+
+/* ===== Lightbox (click an image to view it enlarged, in-page) ===== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: rgba(5, 6, 9, 0.88);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.lightbox.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox-img {
+  max-width: min(90vw, 1100px);
+  max-height: 85vh;
+  width: auto;
+  height: auto;
+  border-radius: var(--radius);
+  box-shadow: 0 30px 80px -20px rgba(0,0,0,0.7);
+  border: 1px solid var(--border);
+  transform: scale(0.96);
+  transition: transform 0.2s ease;
+}
+.lightbox.open .lightbox-img {
+  transform: scale(1);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 22px;
+  right: 26px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--white);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox-close:hover {
+  border-color: var(--blue-light);
+  color: var(--blue-light);
+}
