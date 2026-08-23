@@ -59,17 +59,17 @@
           </div>
           <div class="screen image-screen">
             <div class="slide active">
-              <img src="assets/industries/sportsbar-menu-01.png" alt="Sports bar menu screen preview" />
+              <img src="assets/industries/sportsbar-menu-01.png" alt="Sports bar menu screen preview" class="lightbox-trigger" />
             </div>
             <div class="slide">
-              <img src="assets/industries/salon-services-01.png" alt="Salon services screen preview" />
+              <img src="assets/industries/salon-services-01.png" alt="Salon services screen preview" class="lightbox-trigger" />
             </div>
             <div class="slide">
-              <img src="assets/industries/restaurant-menu-01.png" alt="Restaurant menu screen preview" />
+              <img src="assets/industries/restaurant-menu-01.png" alt="Restaurant menu screen preview" class="lightbox-trigger" />
             </div>
           </div>
         </div>
-        <p class="mockup-caption">Examples of digital signage deployed in real business environments.</p>
+        <p class="mockup-caption">Examples of digital signage deployed in real business environments — click an image to enlarge.</p>
       </div>
     </div>
   </section>
@@ -216,6 +216,12 @@
     </div>
   </div>
 </footer>
+
+<!-- Lightbox overlay: shared by any image with class="lightbox-trigger" -->
+<div id="lightbox" class="lightbox" aria-hidden="true">
+  <button class="lightbox-close" aria-label="Close enlarged image">&times;</button>
+  <img class="lightbox-img" src="" alt="">
+</div>
 
 <script src="script.js"></script>
 </body>
