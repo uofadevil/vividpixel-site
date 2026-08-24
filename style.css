@@ -649,3 +649,18 @@ form.quote-form {
   border-color: var(--blue-light);
   color: var(--blue-light);
 }
+
+/* Quote form submission status (FormSubmit AJAX result) */
+.form-status {
+  font-size: 0.9rem;
+  min-height: 1.2em;
+}
+.form-status.success {
+  color: var(--blue-light);
+}
+.form-status.error {
+  color: #F87171;
+}
+.form-status.error a {
+  text-decoration: underline;
+}
