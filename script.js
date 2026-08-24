@@ -73,21 +73,58 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Contact form -> mailto fallback (static site, no backend)
+  // Quote form -> submits to FormSubmit via AJAX, so the visitor never
+  // leaves the page or has to deal with their own email client.
   const form = document.querySelector('.quote-form');
   if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = form.querySelector('#name').value.trim();
-      const business = form.querySelector('#business').value.trim();
-      const email = form.querySelector('#email').value.trim();
-      const message = form.querySelector('#message').value.trim();
+    const statusEl = document.getElementById('formStatus');
+    const submitBtn = form.querySelector('button[type="submit"]');
 
-      const subject = encodeURIComponent(`Quote request — ${business || name}`);
-      const body = encodeURIComponent(
-        `Name: ${name}\nBusiness: ${business}\nEmail: ${email}\n\n${message}`
-      );
-      window.location.href = `mailto:Nate.Berg@vividpixel.biz?subject=${subject}&body=${body}`;
+    // Fallback path: if JS failed to intercept a prior submission, FormSubmit
+    // redirected back here with ?submitted=true — show the same success state.
+    if (new URLSearchParams(window.location.search).get('submitted') === 'true') {
+      if (statusEl) {
+        statusEl.textContent = "Thanks! Your request is in — check your email for confirmation.";
+        statusEl.classList.add('success');
+      }
+      const cleanUrl = window.location.pathname + window.location.hash;
+      window.history.replaceState({}, '', cleanUrl);
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (statusEl) {
+        statusEl.textContent = '';
+        statusEl.classList.remove('success', 'error');
+      }
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+
+      try {
+        const formData = new FormData(form);
+        const ajaxUrl = form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/');
+        const response = await fetch(ajaxUrl, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' },
+        });
+
+        if (!response.ok) throw new Error('Submission failed');
+
+        form.reset();
+        if (statusEl) {
+          statusEl.textContent = "Thanks! Your request is in — check your email for confirmation.";
+          statusEl.classList.add('success');
+        }
+      } catch (err) {
+        if (statusEl) {
+          statusEl.innerHTML = `Something went wrong sending that. You can also email us directly at <a href="mailto:Nate.Berg@vividpixel.biz">Nate.Berg@vividpixel.biz</a>.`;
+          statusEl.classList.add('error');
+        }
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Quote Request';
+      }
     });
   }
 });
