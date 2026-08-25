@@ -73,15 +73,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Quote form -> submits to FormSubmit via AJAX, so the visitor never
-  // leaves the page or has to deal with their own email client.
+  // Quote form -> submits to Web3Forms via their JSON API, so the visitor
+  // never leaves the page or has to deal with their own email client.
   const form = document.querySelector('.quote-form');
   if (form) {
     const statusEl = document.getElementById('formStatus');
     const submitBtn = form.querySelector('button[type="submit"]');
 
-    // Fallback path: if JS failed to intercept a prior submission, FormSubmit
-    // redirected back here with ?submitted=true — show the same success state.
+    // Fallback path: if JS failed to intercept a prior submission, Web3Forms'
+    // "redirect" field sent them back here with ?submitted=true — show the
+    // same success state.
     if (new URLSearchParams(window.location.search).get('submitted') === 'true') {
       if (statusEl) {
         statusEl.textContent = "Thanks! Your request is in — check your email for confirmation.";
@@ -102,14 +103,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
       try {
         const formData = new FormData(form);
-        const ajaxUrl = form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/');
-        const response = await fetch(ajaxUrl, {
-          method: 'POST',
-          body: formData,
-          headers: { 'Accept': 'application/json' },
-        });
+        const payload = Object.fromEntries(formData);
 
-        if (!response.ok) throw new Error('Submission failed');
+        const response = await fetch(form.action, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+          throw new Error(result.message || 'Submission failed');
+        }
 
         form.reset();
         if (statusEl) {
