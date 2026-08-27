@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // same success state.
     if (new URLSearchParams(window.location.search).get('submitted') === 'true') {
       if (statusEl) {
-        statusEl.textContent = "Thanks! Your request is in — check your email for confirmation.";
+        statusEl.textContent = "Thanks! Your request is in — we'll be in touch shortly.";
         statusEl.classList.add('success');
       }
       const cleanUrl = window.location.pathname + window.location.hash;
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         form.reset();
         if (statusEl) {
-          statusEl.textContent = "Thanks! Your request is in — check your email for confirmation.";
+          statusEl.textContent = "Thanks! Your request is in — we'll be in touch shortly.";
           statusEl.classList.add('success');
         }
       } catch (err) {
