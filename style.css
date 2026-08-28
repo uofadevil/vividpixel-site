@@ -1,25 +1,61 @@
-/* ===== Vivid Pixel — Design Tokens ===== */
+/* ================================================================
+   VIVID PIXEL — STYLESHEET
+   ================================================================
+   This one file styles BOTH pages (index.html and about.html).
+
+   HOW THIS FILE IS ORGANIZED (top to bottom):
+     1. Design tokens (:root)  — every color/font/spacing value in
+        one place. Change a value here and it updates everywhere
+        that value is used across the whole site.
+     2. Generic base styles    — plain HTML elements (body, links,
+        headings, paragraphs)
+     3. Reusable pieces        — buttons, section spacing, etc.
+     4. Page sections in the order they appear on the page: header,
+        hero, how-it-works, who-it's-for, why, CTA band, footer
+     5. About-page-specific styles (contact card, the quote form)
+     6. The lightbox popup
+     7. The quote form's success/error message styling
+
+   THE SINGLE EASIEST WAY TO RESTYLE THE WHOLE SITE:
+   Change the colors/fonts in the :root block right below this
+   comment. Almost everything else in this file references those
+   values (via var(--something)) instead of repeating raw colors,
+   so editing one line there can change the whole site's look.
+   ================================================================ */
+
+/* ===== Design Tokens =====
+   Think of these as the site's "paint palette" and "font kit."
+   var(--bg) elsewhere in this file just means "use whatever color
+   is set here for --bg." */
 :root {
-  --bg: #0B0D12;
-  --surface: #12161F;
-  --surface-2: #1A2030;
-  --border: #232A3A;
-  --blue-light: #4FC3F7;
-  --blue-deep: #1565C0;
-  --white: #F3F6FA;
-  --muted: #8892A6;
-  --muted-dim: #5A6377;
+  --bg: #0B0D12;          /* main page background (near-black) */
+  --surface: #12161F;     /* background for cards/panels sitting on top of the page */
+  --surface-2: #1A2030;   /* a slightly lighter panel color, used for the CTA band */
+  --border: #232A3A;      /* the subtle border/divider color used everywhere */
+  --blue-light: #4FC3F7;  /* the brand's lighter blue — main accent color */
+  --blue-deep: #1565C0;   /* the brand's darker blue — used in gradients with blue-light */
+  --white: #F3F6FA;       /* main text color (an off-white, not pure white) */
+  --muted: #8892A6;       /* secondary/body text color (grayish-blue) */
+  --muted-dim: #5A6377;   /* even quieter text — used for small labels/timestamps */
 
-  --font-display: 'Space Grotesk', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  --font-mono: 'IBM Plex Mono', monospace;
+  /* Font families. These names have to match what's loaded via the
+     Google Fonts <link> in the <head> of index.html/about.html. */
+  --font-display: 'Space Grotesk', sans-serif; /* headlines */
+  --font-body: 'Inter', sans-serif;            /* paragraph text, buttons */
+  --font-mono: 'IBM Plex Mono', monospace;     /* small uppercase labels/tags */
 
-  --radius: 14px;
-  --radius-sm: 8px;
-  --max-width: 1180px;
+  --radius: 14px;      /* the standard rounded-corner size used on cards */
+  --radius-sm: 8px;     /* a smaller rounded-corner size, used on form inputs */
+  --max-width: 1180px;  /* how wide the page content can get before it stops growing */
 }
 
+/* box-sizing: border-box makes padding/borders count INSIDE an
+   element's declared width instead of adding to it — this is a very
+   standard reset that makes layout math much more predictable. */
 * { box-sizing: border-box; }
+
+/* Makes clicking a same-page link (like "How It Works" in the nav)
+   scroll smoothly instead of jumping instantly. */
 html { scroll-behavior: smooth; }
 
 body {
@@ -28,13 +64,20 @@ body {
   color: var(--white);
   font-family: var(--font-body);
   line-height: 1.55;
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased; /* slightly crisper text rendering on Mac/iOS */
 }
 
 img { max-width: 100%; display: block; }
 
+/* Links inherit whatever text color surrounds them (instead of the
+   default blue/purple) and never show an underline unless we add
+   one specifically somewhere. */
 a { color: inherit; text-decoration: none; }
 
+/* .wrap is the "content container" used inside almost every section —
+   it centers content and stops it from stretching edge-to-edge on
+   wide monitors. If you want the whole site narrower or wider, change
+   --max-width above instead of editing this. */
 .wrap {
   max-width: var(--max-width);
   margin: 0 auto;
@@ -49,12 +92,18 @@ h1, h2, h3 {
   letter-spacing: -0.01em;
 }
 
+/* clamp(min, preferred, max) makes text scale smoothly between a
+   minimum and maximum size as the screen gets wider/narrower,
+   instead of jumping abruptly at breakpoints. */
 h1 { font-size: clamp(2.4rem, 5vw, 4rem); }
 h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); }
 h3 { font-size: 1.15rem; }
 
 p { color: var(--muted); margin: 0 0 1em 0; }
 
+/* The small uppercase blue label that sits above most section
+   headings (e.g. "DIGITAL SIGNAGE, MADE SIMPLE"). The little glowing
+   dot before it is drawn with ::before rather than being an image. */
 .eyebrow {
   font-family: var(--font-mono);
   font-size: 0.78rem;
@@ -73,17 +122,20 @@ p { color: var(--muted); margin: 0 0 1em 0; }
   height: 7px;
   border-radius: 50%;
   background: var(--blue-light);
-  box-shadow: 0 0 8px var(--blue-light);
+  box-shadow: 0 0 8px var(--blue-light); /* the soft glow around the dot */
 }
 
-/* Buttons */
+/* ===== Buttons =====
+   .btn is the shared base style (size, padding, rounded shape).
+   .btn-primary and .btn-ghost layer on top of it for the two looks
+   used across the site: solid blue gradient, and outlined/transparent. */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   padding: 13px 26px;
-  border-radius: 999px;
+  border-radius: 999px; /* a very large radius = fully pill-shaped */
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.95rem;
@@ -92,6 +144,7 @@ p { color: var(--muted); margin: 0 0 1em 0; }
   transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease;
 }
 
+/* Visible focus outline for keyboard users (tabbing through the page) */
 .btn:focus-visible {
   outline: 2px solid var(--blue-light);
   outline-offset: 3px;
@@ -101,6 +154,7 @@ p { color: var(--muted); margin: 0 0 1em 0; }
   background: linear-gradient(135deg, var(--blue-light), var(--blue-deep));
   color: #05070A;
 }
+/* On hover, the button lifts slightly and gets a soft blue glow shadow */
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(79, 195, 247, 0.28); }
 
 .btn-ghost {
@@ -112,18 +166,18 @@ p { color: var(--muted); margin: 0 0 1em 0; }
 
 /* ===== Header ===== */
 .site-header {
-  position: sticky;
+  position: sticky; /* stays pinned to the top of the viewport while scrolling */
   top: 0;
-  z-index: 50;
-  background: rgba(11, 13, 18, 0.85);
-  backdrop-filter: blur(10px);
+  z-index: 50; /* keeps it layered above the page content beneath it */
+  background: rgba(11, 13, 18, 0.85); /* semi-transparent so the blur effect below shows through */
+  backdrop-filter: blur(10px); /* the frosted-glass blur effect behind the header */
   border-bottom: 1px solid var(--border);
 }
 
 .site-header .wrap {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; /* logo on the far left, nav+buttons on the far right */
   padding-top: 16px;
   padding-bottom: 16px;
 }
@@ -138,9 +192,13 @@ p { color: var(--muted); margin: 0 0 1em 0; }
   letter-spacing: -0.01em;
 }
 
+/* The actual logo image in the header. If you ever swap the logo
+   file, you likely won't need to touch this — just change the
+   <img src="..."> in the HTML. Adjust "height" here if the new logo
+   looks too big/small next to the nav links. */
 .brand-logo {
   height: 34px;
-  width: auto;
+  width: auto; /* keeps the logo's natural proportions instead of stretching it */
   display: block;
 }
 
@@ -156,11 +214,16 @@ nav.main-nav a.nav-link {
   font-weight: 500;
   transition: color 0.15s ease;
 }
+/* Both a hovered link AND the "current page" link turn white instead
+   of the muted gray — aria-current="page" is set in the HTML on
+   whichever nav link matches the page you're on. */
 nav.main-nav a.nav-link:hover,
 nav.main-nav a.nav-link[aria-current="page"] { color: var(--white); }
 
 .nav-cta { display: flex; align-items: center; gap: 18px; }
 
+/* The ☰ hamburger button — hidden on desktop, shown only on narrow
+   screens (see the @media block just below). */
 .menu-toggle {
   display: none;
   background: none;
@@ -173,6 +236,13 @@ nav.main-nav a.nav-link[aria-current="page"] { color: var(--white); }
   cursor: pointer;
 }
 
+/* ===== MOBILE NAV (screens 860px wide or narrower) =====
+   Everything inside a @media (max-width: ...) block only applies
+   when the browser window is that width or smaller — this is how
+   the whole site adapts to phones/tablets. This particular block:
+   hides the normal nav + Contact button, shows the hamburger button
+   instead, and defines what the nav looks like once it's opened
+   (script.js adds/removes the "open" class when you tap the button). */
 @media (max-width: 860px) {
   nav.main-nav { display: none; }
   .nav-cta .btn-ghost { display: none; }
@@ -201,10 +271,12 @@ nav.main-nav a.nav-link[aria-current="page"] { color: var(--white); }
 /* ===== Hero ===== */
 .hero {
   padding: 90px 0 70px;
-  position: relative;
-  overflow: hidden;
+  position: relative; /* needed so the glow effect below can be positioned relative to this */
+  overflow: hidden; /* keeps the glow from spilling outside the hero and causing scrollbars */
 }
 
+/* A soft blue glow in the top-right corner of the hero — purely
+   decorative, drawn with a radial gradient rather than an image. */
 .hero::before {
   content: '';
   position: absolute;
@@ -213,9 +285,11 @@ nav.main-nav a.nav-link[aria-current="page"] { color: var(--white); }
   width: 520px;
   height: 520px;
   background: radial-gradient(circle, rgba(79,195,247,0.16), transparent 70%);
-  pointer-events: none;
+  pointer-events: none; /* so it never blocks clicks on anything beneath it */
 }
 
+/* The two-column layout: copy on the left (slightly wider, 1.05fr),
+   mock screen on the right (0.95fr). */
 .hero-grid {
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
@@ -223,13 +297,14 @@ nav.main-nav a.nav-link[aria-current="page"] { color: var(--white); }
   align-items: center;
 }
 
+/* On narrower screens, stack into a single column instead of two side by side */
 @media (max-width: 900px) {
   .hero-grid { grid-template-columns: 1fr; }
 }
 
 .hero-copy p.lead {
   font-size: 1.1rem;
-  max-width: 46ch;
+  max-width: 46ch; /* "46ch" = about 46 characters wide, keeps the line length readable */
   margin-bottom: 28px;
 }
 
@@ -245,13 +320,16 @@ nav.main-nav a.nav-link[aria-current="page"] { color: var(--white); }
   letter-spacing: 0.02em;
 }
 
-/* Signature: mock signage screen */
+/* ===== Signature element: the mock signage screen =====
+   This is the "fake TV" on the right side of the hero. .screen-mockup
+   is the outer frame/card; .screen is the actual dark "display" area
+   inside it where the rotating photos (.slide) live. */
 .screen-mockup {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 16px;
-  box-shadow: 0 30px 60px -20px rgba(0,0,0,0.6);
+  box-shadow: 0 30px 60px -20px rgba(0,0,0,0.6); /* soft drop shadow under the whole card */
 }
 
 .screen-mockup-bar {
@@ -270,6 +348,7 @@ nav.main-nav a.nav-link[aria-current="page"] { color: var(--white); }
   gap: 6px;
   color: var(--blue-light);
 }
+/* The small pulsing dot next to "LIVE PREVIEW" */
 .screen-mockup-bar .live::before {
   content: '';
   width: 6px;
@@ -279,38 +358,58 @@ nav.main-nav a.nav-link[aria-current="page"] { color: var(--white); }
   animation: pulse 1.6s infinite ease-in-out;
 }
 
+/* Defines what the "pulse" animation referenced above actually does:
+   fade between fully visible and mostly transparent, on a loop. */
 @keyframes pulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.25; }
 }
 
+/* The dark "display" area itself. aspect-ratio: 16/10 keeps its
+   proportions consistent (like a real screen) no matter how wide
+   the hero column is. */
 .screen {
-  position: relative;
+  position: relative; /* needed so the .slide images inside can be positioned absolutely within it */
   aspect-ratio: 16 / 10;
   border-radius: 12px;
-  overflow: hidden;
-  background: linear-gradient(160deg, #0E2A3D, #071019 65%);
+  overflow: hidden; /* clips the photos to the screen's rounded corners */
+  background: linear-gradient(160deg, #0E2A3D, #071019 65%); /* visible briefly before an image loads */
   border: 1px solid var(--border);
 }
 
+/* Each .slide sits stacked exactly on top of the others (inset: 0
+   inside a position:relative parent means "fill the whole parent").
+   Only the ".active" one is visible — script.js swaps which slide
+   has the "active" class every few seconds. */
 .slide {
   position: absolute;
   inset: 0;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-end; /* this only matters for old-style text slides; images ignore it, see below */
   padding: 22px;
   opacity: 0;
-  transform: scale(1.02);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: scale(1.02); /* slides start very slightly zoomed in, then settle to normal size when active */
+  transition: opacity 0.6s ease, transform 0.6s ease; /* the fade/zoom happens smoothly over 0.6 seconds */
 }
 .slide.active { opacity: 1; transform: scale(1); }
 
-/* Only the visible slide should be clickable — otherwise the last slide
-   in the HTML always sits on top and swallows clicks meant for others. */
+/* IMPORTANT FIX: without this, clicking anywhere on the mock screen
+   would always open whichever slide happens to be LAST in the HTML,
+   regardless of which one you can actually see — because all three
+   slides are stacked in the exact same spot, and by default the one
+   listed last in the HTML sits "on top" for click purposes even
+   when it's invisible (opacity: 0 doesn't stop clicks). This says
+   "only the currently-visible slide should respond to clicks." */
 .slide { pointer-events: none; }
 .slide.active { pointer-events: auto; }
 
+/* These .tag/h4/p rules were built for an earlier version of the
+   hero that showed text overlays (like "Today's Special — Green
+   Chile Burger") instead of real photos. They're not currently used
+   since the hero now shows real images, but they're harmless to
+   leave here — if you ever wanted to add a text-only slide back in
+   alongside the photos, this styling is ready to go. */
 .slide .tag {
   font-family: var(--font-mono);
   font-size: 0.68rem;
@@ -327,8 +426,11 @@ nav.main-nav a.nav-link[aria-current="page"] { color: var(--white); }
 }
 .slide p { color: rgba(243,246,250,0.75); margin: 0; font-size: 0.9rem; }
 
-/* Image slides (real signage example photos) fill the frame edge-to-edge,
-   cropping to cover rather than being padded/inset like text slides. */
+/* Image slides (the real signage example photos) fill the screen
+   completely edge-to-edge, cropping as needed to cover the whole
+   area (object-fit: cover) rather than being squeezed/stretched or
+   padded like the old text slides above. border-radius: inherit
+   means "match whatever rounded corner the parent .screen has." */
 .slide img {
   width: 100%;
   height: 100%;
@@ -336,10 +438,16 @@ nav.main-nav a.nav-link[aria-current="page"] { color: var(--white); }
   border-radius: inherit;
 }
 
+/* Removes the 22px padding (set on .slide above) specifically when
+   a slide is inside the "image-screen" version — photos should sit
+   flush against the edges, not indented. */
 .screen.image-screen .slide {
   padding: 0;
 }
 
+/* The cursor turns into a "zoom in" magnifying-glass icon when
+   hovering a clickable preview image, and the image brightens
+   slightly, both as a visual hint that it's clickable. */
 .slide img.lightbox-trigger {
   cursor: zoom-in;
   transition: filter 0.2s ease;
@@ -356,7 +464,10 @@ nav.main-nav a.nav-link[aria-current="page"] { color: var(--white); }
   margin-top: 14px;
 }
 
-/* ===== Sections ===== */
+/* ===== General section spacing =====
+   Applies to every <section> on the page unless overridden.
+   section.tight is used on a couple of sections that want less
+   breathing room above/below than the default. */
 section { padding: 76px 0; }
 section.tight { padding: 56px 0; }
 .section-head { max-width: 640px; margin-bottom: 44px; }
@@ -364,12 +475,13 @@ section.tight { padding: 56px 0; }
 
 .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
 
-/* Steps */
+/* ===== "How It Works" step cards ===== */
 .steps {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr); /* 3 equal-width columns on desktop */
   gap: 28px;
 }
+/* Stack into a single column on narrower screens */
 @media (max-width: 780px) { .steps { grid-template-columns: 1fr; } }
 
 .step {
@@ -388,12 +500,13 @@ section.tight { padding: 56px 0; }
 .step h3 { margin-bottom: 10px; }
 .step p { margin: 0; font-size: 0.94rem; }
 
-/* Use case grid */
+/* ===== "Who It's For" use-case cards ===== */
 .use-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr); /* 4 columns on desktop */
   gap: 20px;
 }
+/* Fewer columns as the screen narrows, so cards don't get squeezed too thin */
 @media (max-width: 980px) { .use-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .use-grid { grid-template-columns: 1fr; } }
 
@@ -404,11 +517,12 @@ section.tight { padding: 56px 0; }
   background: linear-gradient(160deg, var(--surface), var(--bg));
   transition: border-color 0.15s ease, transform 0.15s ease;
 }
+/* Cards lift slightly and their border glows blue on hover */
 .use-card:hover { border-color: var(--blue-light); transform: translateY(-3px); }
 .use-card .icon {
   width: 40px; height: 40px;
   border-radius: 10px;
-  background: rgba(79,195,247,0.12);
+  background: rgba(79,195,247,0.12); /* a very faint blue tint behind the emoji */
   color: var(--blue-light);
   display: flex; align-items: center; justify-content: center;
   margin-bottom: 16px;
@@ -417,17 +531,17 @@ section.tight { padding: 56px 0; }
 .use-card h3 { font-size: 1rem; margin-bottom: 6px; }
 .use-card p { font-size: 0.88rem; margin: 0; }
 
-/* Why list */
+/* ===== "Why Vivid Pixel" checklist ===== */
 .why-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr); /* 2 columns on desktop */
   gap: 24px 40px;
 }
 @media (max-width: 700px) { .why-grid { grid-template-columns: 1fr; } }
 
 .why-item { display: flex; gap: 14px; }
 .why-item .mark {
-  flex-shrink: 0;
+  flex-shrink: 0; /* keeps the ✓ circle from getting squished if the text next to it wraps */
   width: 30px; height: 30px;
   border-radius: 50%;
   background: rgba(79,195,247,0.12);
@@ -439,7 +553,7 @@ section.tight { padding: 56px 0; }
 .why-item h3 { font-size: 1rem; margin-bottom: 4px; }
 .why-item p { margin: 0; font-size: 0.9rem; }
 
-/* CTA band */
+/* ===== Bottom call-to-action band ===== */
 .cta-band {
   background: linear-gradient(135deg, var(--surface-2), var(--surface));
   border: 1px solid var(--border);
@@ -447,14 +561,14 @@ section.tight { padding: 56px 0; }
   padding: 52px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; /* text on the left, button on the right */
   gap: 30px;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* lets the button drop below the text on narrow screens instead of overflowing */
 }
 .cta-band h2 { margin-bottom: 8px; }
 .cta-band p { margin: 0; }
 
-/* Footer */
+/* ===== Footer ===== */
 footer.site-footer {
   border-top: 1px solid var(--border);
   padding: 44px 0 30px;
@@ -463,7 +577,7 @@ footer.site-footer {
   display: flex;
   justify-content: space-between;
   gap: 30px;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* the 3 columns stack on narrow screens instead of squeezing together */
   margin-bottom: 26px;
 }
 .footer-col h4 {
@@ -491,12 +605,16 @@ footer.site-footer {
   gap: 10px;
 }
 
-/* ===== About / Contact page ===== */
+/* ================================================================
+   ABOUT / CONTACT PAGE — styles used only on about.html
+   ================================================================ */
+
+/* The 2-column layout for the About story + contact card */
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 56px;
-  align-items: start;
+  align-items: start; /* keeps both columns aligned to the top instead of stretching to match height */
 }
 @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } }
 
@@ -522,7 +640,7 @@ footer.site-footer {
   padding: 14px 0;
   border-bottom: 1px solid var(--border);
 }
-.contact-row:last-child { border-bottom: none; }
+.contact-row:last-child { border-bottom: none; } /* no divider line under the very last row */
 .contact-row .icon {
   width: 34px; height: 34px;
   border-radius: 8px;
@@ -543,15 +661,18 @@ footer.site-footer {
 .contact-row .value { color: var(--white); font-size: 0.96rem; }
 .contact-row .note { color: var(--muted-dim); font-size: 0.8rem; margin-top: 2px; }
 
+/* ===== The quote request form ===== */
 form.quote-form {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 32px;
   display: grid;
-  gap: 18px;
+  gap: 18px; /* the space between each row/field of the form */
 }
+/* "Your Name" and "Business Name" sit side by side on desktop... */
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+/* ...and stack on top of each other on narrow screens */
 @media (max-width: 560px) { .form-row { grid-template-columns: 1fr; } }
 
 .field label {
@@ -575,13 +696,14 @@ form.quote-form {
   font-family: var(--font-body);
   font-size: 0.95rem;
 }
+/* The blue border glow when you click into a field */
 .field input:focus,
 .field textarea:focus,
 .field select:focus {
   outline: none;
   border-color: var(--blue-light);
 }
-.field textarea { resize: vertical; min-height: 110px; }
+.field textarea { resize: vertical; min-height: 110px; } /* lets visitors drag to make the box taller, but not wider */
 
 .form-note {
   font-size: 0.82rem;
@@ -590,18 +712,23 @@ form.quote-form {
 }
 
 .story p { font-size: 1rem; }
-.story p:last-child { margin-bottom: 0; }
+.story p:last-child { margin-bottom: 0; } /* removes the extra gap after the very last paragraph */
 
-/* ===== Lightbox (click an image to view it enlarged, in-page) ===== */
+/* ================================================================
+   LIGHTBOX (click a preview image to view it enlarged, in-page)
+   ================================================================
+   .lightbox is the full-screen dark overlay. It's always present
+   in the HTML but invisible (opacity: 0, visibility: hidden) until
+   script.js adds the "open" class to it. */
 .lightbox {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
+  position: fixed; /* stays in place even if the page is scrolled */
+  inset: 0; /* covers the entire screen */
+  z-index: 200; /* sits above literally everything else on the page */
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 40px;
-  background: rgba(5, 6, 9, 0.88);
+  background: rgba(5, 6, 9, 0.88); /* the dark dimmed backdrop */
   backdrop-filter: blur(6px);
   opacity: 0;
   visibility: hidden;
@@ -614,20 +741,21 @@ form.quote-form {
 }
 
 .lightbox-img {
-  max-width: min(90vw, 1100px);
+  max-width: min(90vw, 1100px); /* never wider than 90% of the screen OR 1100px, whichever is smaller */
   max-height: 85vh;
   width: auto;
   height: auto;
   border-radius: var(--radius);
   box-shadow: 0 30px 80px -20px rgba(0,0,0,0.7);
   border: 1px solid var(--border);
-  transform: scale(0.96);
+  transform: scale(0.96); /* starts very slightly small and pops to full size when opened, a subtle "pop" effect */
   transition: transform 0.2s ease;
 }
 .lightbox.open .lightbox-img {
   transform: scale(1);
 }
 
+/* The circular ✕ close button in the corner of the lightbox */
 .lightbox-close {
   position: absolute;
   top: 22px;
@@ -650,17 +778,25 @@ form.quote-form {
   color: var(--blue-light);
 }
 
-/* Quote form submission status (FormSubmit AJAX result) */
+/* ================================================================
+   QUOTE FORM SUBMISSION STATUS
+   ================================================================
+   Styles the little message that appears under the "Send Quote
+   Request" button after someone submits — either a success message
+   (blue text) or an error message (red text with a fallback mailto
+   link). script.js decides which text goes here and adds either
+   the "success" or "error" class; this file just controls how each
+   one looks. */
 .form-status {
   font-size: 0.9rem;
-  min-height: 1.2em;
+  min-height: 1.2em; /* reserves space so the page doesn't visibly "jump" when the message appears */
 }
 .form-status.success {
   color: var(--blue-light);
 }
 .form-status.error {
-  color: #F87171;
+  color: #F87171; /* a soft red, used only for the error state */
 }
 .form-status.error a {
-  text-decoration: underline;
+  text-decoration: underline; /* makes the "email us directly" fallback link in the error message stand out */
 }

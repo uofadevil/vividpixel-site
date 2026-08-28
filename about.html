@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- ============================================================
+     VIVID PIXEL — ABOUT / CONTACT PAGE
+     ============================================================
+     This page has two main parts:
+       1. The "About" story + contact-info card near the top
+       2. The "Get a Free Quote" form further down (id="quote")
+
+     See the top of index.html for the general file-organization
+     notes (style.css = looks, script.js = behavior). This page
+     shares BOTH of those files with the home page — nothing here
+     is specific to just this page except the actual wording below.
+     ============================================================ -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About &amp; Contact — Vivid Pixel</title>
@@ -8,10 +20,16 @@
 <link rel="icon" href="assets/branding/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Cache-buster note: see index.html's <head> comments — bump ?v=2 to
+     ?v=3 here (and in index.html, and at the bottom of both pages for
+     script.js) any time you edit style.css/script.js and the live site
+     doesn't seem to reflect your changes. -->
 <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
 
+<!-- Same header as index.html, just with "About / Contact" marked as
+     the current page instead of "Home" (see aria-current="page" below). -->
 <header class="site-header">
   <div class="wrap">
     <a href="index.html" class="brand">
@@ -31,15 +49,30 @@
 </header>
 
 <main>
-  <!-- ABOUT -->
+  <!-- ============================================================
+       ABOUT + CONTACT INFO
+       Two columns on desktop (story on the left, contact card on
+       the right), stacked on mobile. That's controlled by
+       .about-grid in style.css.
+       ============================================================ -->
+  <!-- The inline style="padding-top: 60px;" just nudges this section
+       down a bit from the header — a one-off tweak rather than a
+       reusable style.css rule, since it's only needed here. -->
   <section style="padding-top: 60px;">
     <div class="wrap about-grid">
+      <!-- LEFT: the written story -->
       <div class="story">
         <span class="eyebrow">About Vivid Pixel</span>
+        <!-- This heading has its own inline font-size instead of using
+             the site-wide h1 size from style.css, because this page's
+             heading is meant to feel a little smaller/quieter than the
+             big homepage h1. -->
         <h1 style="font-size: clamp(2rem, 4vw, 2.8rem);">Run by one person who actually shows up.</h1>
         <p>Vivid Pixel is a Tucson-based digital signage service — no call center, no account rep who's never seen your business. When you work with Vivid Pixel, you're working directly with the person who plans, installs, and supports your screens.</p>
         <p>The platform behind the scenes is built on proven, professional-grade signage technology — but branded and supported locally, so you get enterprise-level reliability with small-business responsiveness.</p>
         <p>Vivid Pixel also draws on hands-on experience across both commercial and residential AV, so screen placement, wiring, and setup are handled with an eye for how spaces actually get used.</p>
+        <!-- The little pill-shaped tags under the story text. Add/remove
+             a <span class="badge"> to add/remove one. -->
         <div class="badge-row">
           <span class="badge">Tucson, AZ</span>
           <span class="badge">Commercial &amp; Residential AV Background</span>
@@ -47,6 +80,7 @@
         </div>
       </div>
 
+      <!-- RIGHT: the contact-info card (email / phone / service area) -->
       <div class="contact-card">
         <h3 style="margin-bottom: 18px;">Get in touch</h3>
         <div class="contact-row">
@@ -60,6 +94,13 @@
           <span class="icon">📞</span>
           <div>
             <div class="label">Phone</div>
+            <!-- STILL A PLACEHOLDER NUMBER. Once you have a real business
+                 line, update BOTH the visible text "(520) 123-4567" AND
+                 the tel:5201234567 link (just the digits, no punctuation)
+                 right here, plus the matching one in the footer below,
+                 plus the two more in index.html's footer. Four spots
+                 total across both pages. Then delete the "Placeholder
+                 number" note on the next line. -->
             <a class="value" href="tel:5201234567">(520) 123-4567</a>
             <div class="note">Placeholder number — line coming soon.</div>
           </div>
@@ -77,24 +118,76 @@
 
   <hr class="divider" style="margin: 60px 0;">
 
-  <!-- CONTACT FORM -->
+  <!-- ============================================================
+       QUOTE REQUEST FORM
+       id="quote" is what every "Get a Quote" button/link on the
+       site jumps to.
+
+       HOW THIS FORM ACTUALLY SENDS EMAIL (worth understanding,
+       since there's no traditional "server" for a site like this):
+       This form submits to a free third-party service called
+       Web3Forms. The <form action="..."> below points at their
+       API. When someone submits, script.js intercepts that
+       submission (see the "Quote form" section near the bottom of
+       script.js) and sends the data to Web3Forms using JavaScript,
+       which then emails it straight to your inbox. The visitor
+       never leaves this page or opens their own email app.
+
+       Right now there's NO automatic confirmation email back to
+       the customer — that's a paid feature on Web3Forms ($12/mo
+       Pro plan). If you ever want that, upgrading Web3Forms is the
+       fix, and no code changes would be needed beyond flipping a
+       setting in their dashboard.
+       ============================================================ -->
   <section id="quote" class="tight">
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Get a Free Quote</span>
         <h2>Tell us about your space.</h2>
-        <p>Fill this out and it'll open a pre-filled email — no account or signup needed.</p>
+        <!-- This line used to say the form "opens a pre-filled email" —
+             that was leftover copy from an earlier version. Fixed to
+             match what the form actually does now (sends directly,
+             no email app involved). -->
+        <p>Fill this out and we'll get your request right away — no email app needed.</p>
       </div>
 
       <form class="quote-form" style="max-width: 640px;" action="https://api.web3forms.com/submit" method="POST">
-        <!-- Web3Forms configuration (all hidden, none shown to the visitor) -->
+        <!-- ---- Web3Forms configuration fields ----
+             These are all hidden — the visitor never sees or fills
+             these in. They configure how Web3Forms handles the
+             submission. DO NOT delete the access_key line below or
+             the form will stop working entirely (it's the "address"
+             that tells Web3Forms which inbox to deliver to). -->
+
+        <!-- Your unique Web3Forms key — tied to Nate.Berg@vividpixel.biz.
+             Treat this like a mailing address, not a password: it's
+             meant to be public/visible in website code, so there's no
+             security risk in it being here. -->
         <input type="hidden" name="access_key" value="88f871cf-ae2a-49b0-9ded-cb784526333e">
+
+        <!-- The subject line of the email you'll receive -->
         <input type="hidden" name="subject" value="New Quote Request — Vivid Pixel Website">
+
+        <!-- The "from name" shown on the notification email in your inbox -->
         <input type="hidden" name="from_name" value="Vivid Pixel Website">
+
+        <!-- Fallback only: if a visitor's browser somehow can't run the
+             JavaScript version (see script.js), the plain HTML form
+             submission still works, and Web3Forms sends them back to
+             this exact URL afterward so they still see a confirmation
+             message (script.js checks for "?submitted=true" and shows
+             the success text even in this fallback case). You shouldn't
+             need to touch this. -->
         <input type="hidden" name="redirect" value="https://vividpixel.biz/about.html?submitted=true">
-        <!-- Honeypot field: Web3Forms' documented spam-catcher. Real visitors never see or check this. -->
+
+        <!-- Honeypot spam-catcher: a checkbox that's hidden with CSS so
+             real visitors never see it or check it. Spam bots that
+             blindly fill out every field on a page will often check it
+             anyway, and Web3Forms silently discards the submission when
+             they do. Leave this exactly as-is. -->
         <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
 
+        <!-- ---- Actual visible form fields ---- -->
         <div class="form-row">
           <div class="field">
             <label for="name">Your Name</label>
@@ -114,13 +207,21 @@
           <textarea id="message" name="message" placeholder="e.g. 2 screens for a menu board and a promo wall near the entrance"></textarea>
         </div>
         <button type="submit" class="btn btn-primary" style="justify-self: start;">Send Quote Request</button>
+
+        <!-- This empty div is where script.js writes the "Thanks! Your
+             request is in..." success message (or an error message) after
+             someone submits. It's intentionally empty here — don't add
+             text inside it, script.js controls what appears. -->
         <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+
         <p class="form-note">We'll be in touch shortly to talk through your setup.</p>
       </form>
     </div>
   </section>
 </main>
 
+<!-- Same footer as index.html — see the comments there for details.
+     Kept identical on purpose so both pages feel consistent. -->
 <footer class="site-footer">
   <div class="wrap">
     <div class="footer-grid">

@@ -1,28 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- ============================================================
+     VIVID PIXEL — HOME PAGE
+     ============================================================
+     This is the main landing page. There's one other page,
+     about.html (About / Contact + the quote form).
+
+     Both pages share two files:
+       - style.css   -> all the visual design (colors, fonts, layout)
+       - script.js   -> anything interactive (menu toggle, image
+                        rotation, the lightbox popup, the quote form)
+
+     If you want to change how something LOOKS, look in style.css.
+     If you want to change how something BEHAVES, look in script.js.
+     If you want to change WORDING or WHICH IMAGES show up, it's
+     usually right here in the HTML.
+     ============================================================ -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- This is the text shown in the browser tab and in Google search results -->
 <title>Vivid Pixel — Digital Signage for Tucson Businesses</title>
+
+<!-- This "description" text is what often shows up under your link in Google
+     search results. Keep it short (under ~160 characters) and inviting. -->
 <meta name="description" content="Vivid Pixel puts easy, affordable digital signage on your screens — menus, promos, and updates you can push from your phone. Serving the Tucson, AZ metro area.">
+
+<!-- The little icon that shows up in the browser tab -->
 <link rel="icon" href="assets/branding/logo.png">
+
+<!-- These two lines load the fonts used across the whole site from Google
+     Fonts: Space Grotesk (headlines), Inter (body text), IBM Plex Mono
+     (the small uppercase labels like "DIGITAL SIGNAGE, MADE SIMPLE").
+     If you ever wanted different fonts, you'd change the font names in
+     BOTH this URL and in style.css's :root section at the very top. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- The "?v=2" at the end is a cache-buster. Browsers aggressively cache
+     CSS/JS files, so if you ever edit style.css or script.js and your
+     changes don't seem to show up on the live site, just bump this to
+     ?v=3 (and do the same at the bottom for script.js) to force browsers
+     to grab the fresh version instead of an old cached copy. -->
 <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
 
+<!-- ============================================================
+     HEADER / NAVIGATION
+     Appears identically at the top of every page. It's "sticky"
+     (stays visible when you scroll) — that's controlled by
+     .site-header in style.css.
+     ============================================================ -->
 <header class="site-header">
   <div class="wrap">
+    <!-- The logo image + wordmark. Clicking it always goes home. -->
     <a href="index.html" class="brand">
       <img src="assets/branding/logo-header.png" alt="Vivid Pixel" class="brand-logo" />
     </a>
+
+    <!-- Main nav links. On mobile/narrow screens these get hidden and
+         replaced by the ☰ hamburger button below (see .menu-toggle in
+         style.css, and the toggle logic in script.js). -->
     <nav class="main-nav">
+      <!-- aria-current="page" tells screen readers (and our CSS) which
+           link represents the page you're currently on — that's what
+           makes "Home" appear brighter/highlighted here. -->
       <a class="nav-link" href="index.html" aria-current="page">Home</a>
+      <!-- These two links jump down to sections further down THIS page,
+           using the #id of the section (see id="how-it-works" and
+           id="who-its-for" below). -->
       <a class="nav-link" href="index.html#how-it-works">How It Works</a>
       <a class="nav-link" href="index.html#who-its-for">Who It's For</a>
       <a class="nav-link" href="about.html">About / Contact</a>
     </nav>
+
+    <!-- Buttons on the far right, plus the mobile hamburger button.
+         "Get a Quote" links to about.html and then jumps straight to
+         the form using #quote (the form's section has id="quote"). -->
     <div class="nav-cta">
       <a href="about.html" class="btn btn-ghost">Contact</a>
       <a href="about.html#quote" class="btn btn-primary">Get a Quote</a>
@@ -32,17 +88,29 @@
 </header>
 
 <main>
-  <!-- HERO -->
+  <!-- ============================================================
+       HERO SECTION
+       The big intro block at the top: headline + subtext + buttons
+       on the left, and the "live preview" mock screen on the right
+       showing real example photos.
+       ============================================================ -->
   <section class="hero">
     <div class="wrap hero-grid">
+      <!-- LEFT SIDE: headline, subtext, buttons, trust badges -->
       <div class="hero-copy">
+        <!-- The small blue uppercase label above the headline -->
         <span class="eyebrow">Digital Signage, Made Simple</span>
         <h1>Turn any screen into a living Tucson storefront.</h1>
         <p class="lead">Vivid Pixel installs and manages digital signage for small and medium businesses across the Tucson metro — menus, promos, hours, and announcements you update from your phone in seconds.</p>
+
+        <!-- The two call-to-action buttons -->
         <div class="hero-actions">
           <a href="about.html#quote" class="btn btn-primary">Get a Free Quote</a>
           <a href="#how-it-works" class="btn btn-ghost">See How It Works</a>
         </div>
+
+        <!-- The small row of trust points under the buttons
+             (LOCALLY OPERATED · NO LONG CONTRACTS · etc.) -->
         <div class="hero-trust">
           <span>LOCALLY OPERATED · TUCSON, AZ</span>
           <span>NO LONG CONTRACTS</span>
@@ -50,12 +118,35 @@
         </div>
       </div>
 
+      <!-- RIGHT SIDE: the "live preview" mock signage screen.
+           This is the site's signature visual — it makes a fake TV
+           screen and cycles through real example photos inside it,
+           just like a real Yodeck-powered display would rotate
+           content. The cycling and click-to-enlarge behavior is all
+           handled in script.js, not here. -->
       <div class="hero-visual">
         <div class="screen-mockup">
+          <!-- The thin bar above the "screen" with the pulsing blue
+               dot and "LIVE PREVIEW" label -->
           <div class="screen-mockup-bar">
             <span class="live">LIVE PREVIEW</span>
             <span>REAL CUSTOMER USE CASES</span>
           </div>
+
+          <!-- The "screen" itself. Each .slide is one photo.
+               HOW TO ADD/REMOVE/REORDER PHOTOS:
+               - To add a new example photo, copy one of the <div class="slide">
+                 blocks below, paste it as a new one, and point its <img src="">
+                 at your new file (upload it into assets/industries/ first).
+               - To remove one, just delete its whole <div class="slide">...</div> block.
+               - The FIRST slide should keep the class="slide active" —
+                 that's what makes it the one visible when the page loads.
+                 script.js automatically cycles through however many
+                 slides exist, so you don't need to touch script.js at
+                 all when adding/removing photos.
+               - class="lightbox-trigger" is what makes an image
+                 clickable to view enlarged — keep that on any slide
+                 image you want to be clickable. -->
           <div class="screen image-screen">
             <div class="slide active">
               <img src="assets/industries/sportsbar-menu-01.png" alt="Sports bar menu screen preview" class="lightbox-trigger" />
@@ -73,9 +164,14 @@
     </div>
   </section>
 
+  <!-- A plain horizontal line used a couple times on the page as a
+       simple section divider. Purely visual, styled by .divider. -->
   <hr class="divider">
 
-  <!-- HOW IT WORKS -->
+  <!-- ============================================================
+       HOW IT WORKS — the 3-step process cards
+       id="how-it-works" is what the nav link above jumps to.
+       ============================================================ -->
   <section id="how-it-works">
     <div class="wrap">
       <div class="section-head">
@@ -83,6 +179,12 @@
         <h2>From blank wall to running screen in three steps.</h2>
         <p>No IT department required. We handle the setup — you handle the content, whenever you want to change it.</p>
       </div>
+      <!-- Each .step is one numbered card. To add a 4th step, copy one
+           of these blocks and change the number/heading/text. If you
+           add a 4th, you may want to widen .steps in style.css from
+           3 columns to 4 (grid-template-columns) so they still fit
+           in one row on desktop — otherwise it'll just wrap, which
+           still looks fine. -->
       <div class="steps">
         <div class="step">
           <span class="num">01</span>
@@ -103,13 +205,24 @@
     </div>
   </section>
 
-  <!-- WHO IT'S FOR -->
+  <!-- ============================================================
+       WHO IT'S FOR — the 4 business-type cards with emoji icons
+       id="who-its-for" is what the nav link jumps to.
+       class="tight" just means this section has slightly less
+       top/bottom padding than a normal section (see "section.tight"
+       in style.css).
+       ============================================================ -->
   <section id="who-its-for" class="tight">
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Who It's For</span>
         <h2>Built for the businesses that make up Tucson.</h2>
       </div>
+      <!-- Each .use-card is one business type. The emoji in .icon is
+           just plain text — you can swap any emoji for another one
+           directly (no image file needed). To add a 5th card, copy
+           a whole .use-card block; the grid below will automatically
+           wrap it to a new row. -->
       <div class="use-grid">
         <div class="use-card">
           <div class="icon">🍔</div>
@@ -137,13 +250,17 @@
 
   <hr class="divider">
 
-  <!-- WHY VIVID PIXEL -->
+  <!-- ============================================================
+       WHY VIVID PIXEL — the 4-point checklist with checkmarks
+       ============================================================ -->
   <section>
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Why Vivid Pixel</span>
         <h2>A local partner, not a call center.</h2>
       </div>
+      <!-- Each .why-item is one row with a ✓ mark. Same pattern as
+           the use-cards above — copy a block to add another point. -->
       <div class="why-grid">
         <div class="why-item">
           <span class="mark">✓</span>
@@ -177,7 +294,11 @@
     </div>
   </section>
 
-  <!-- CTA -->
+  <!-- ============================================================
+       BOTTOM CALL-TO-ACTION BAND
+       The highlighted box right before the footer, nudging people
+       toward the quote form one more time.
+       ============================================================ -->
   <section>
     <div class="wrap">
       <div class="cta-band">
@@ -191,6 +312,11 @@
   </section>
 </main>
 
+<!-- ============================================================
+     FOOTER
+     Identical on every page. Three columns: brand blurb, contact
+     info, and site links, plus a copyright line at the very bottom.
+     ============================================================ -->
 <footer class="site-footer">
   <div class="wrap">
     <div class="footer-grid">
@@ -200,6 +326,10 @@
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
+        <!-- mailto: link opens the visitor's own email app addressed to you.
+             tel: link lets mobile visitors tap to call directly.
+             NOTE: (520) 123-4567 is still a placeholder number — see the
+             note in about.html near the same phone number for details. -->
         <a href="mailto:Nate.Berg@vividpixel.biz">Nate.Berg@vividpixel.biz</a>
         <a href="tel:5201234567">(520) 123-4567</a>
       </div>
@@ -210,18 +340,35 @@
       </div>
     </div>
     <div class="footer-bottom">
+      <!-- Just plain text — this year doesn't update automatically.
+           If you want a "live" copyright year that always shows the
+           current year, that would need a small script.js addition;
+           for now, just update the "2026" by hand if it ever matters. -->
       <span>© 2026 Vivid Pixel. Tucson, AZ.</span>
       <span>Serving the greater Tucson metro area.</span>
     </div>
   </div>
 </footer>
 
-<!-- Lightbox overlay: shared by any image with class="lightbox-trigger" -->
+<!-- ============================================================
+     LIGHTBOX POPUP (hidden by default)
+     This is the dark overlay + enlarged image that appears when you
+     click one of the hero's preview images. It's a single shared
+     element — script.js just swaps its image source depending on
+     which thumbnail you clicked, rather than creating a new popup
+     each time. You shouldn't need to touch this markup; the
+     click-to-open, click-outside-to-close, and Escape-key-to-close
+     behavior all lives in script.js.
+     ============================================================ -->
 <div id="lightbox" class="lightbox" aria-hidden="true">
   <button class="lightbox-close" aria-label="Close enlarged image">&times;</button>
   <img class="lightbox-img" src="" alt="">
 </div>
 
+<!-- Loads the interactive behavior — see script.js for all the comments
+     on what each piece does. Same cache-busting note as the CSS link
+     above: bump ?v=2 to ?v=3 if you edit script.js and don't see the
+     change take effect. -->
 <script src="script.js?v=2"></script>
 </body>
 </html>
