@@ -456,6 +456,97 @@ nav.main-nav a.nav-link[aria-current="page"] { color: var(--white); }
   filter: brightness(1.08);
 }
 
+/* ================================================================
+   HOME HERO — "SERVICE PEEK" CARDS
+   ================================================================
+   The 2x2 grid of clickable service cards that replaced the old
+   animated mock-screen as the Home page hero's visual. Each card is
+   an <a> tag linking straight to that service's section on
+   services.html (via #conference-room, #signage, etc.).
+
+   If you add a 5th service someday: copy a card block in
+   index.html, and this grid will wrap it automatically — but with
+   5 cards in a 2-column grid the last one sits alone on its own
+   row, which looks a bit lopsided. Either add a 6th, or change
+   "repeat(2, 1fr)" below to "repeat(3, 1fr)". */
+.service-peek-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+/* Stack to a single column on very narrow phones */
+@media (max-width: 480px) { .service-peek-grid { grid-template-columns: 1fr; } }
+
+.service-peek {
+  display: block; /* it's an <a> tag — this makes it behave as a full card rather than an inline text link */
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+/* Same lift-and-glow hover treatment used on the .use-card grid,
+   kept consistent so all clickable cards on the site feel alike */
+.service-peek:hover { border-color: var(--blue-light); transform: translateY(-3px); }
+.service-peek .icon { font-size: 1.4rem; margin-bottom: 10px; display: block; }
+.service-peek h3 { font-size: 0.98rem; margin-bottom: 6px; }
+.service-peek p { font-size: 0.82rem; margin: 0; }
+
+/* ================================================================
+   SERVICES PAGE (services.html)
+   ================================================================
+   .service-split is the two-column layout used where a service has
+   a visual next to its description (currently just Digital Signage,
+   which shows the mock screen). It's functionally the same as
+   .hero-grid, but named separately so it's obvious it's an
+   intentional reuse outside the hero rather than a copy/paste slip. */
+.service-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+@media (max-width: 900px) { .service-split { grid-template-columns: 1fr; } }
+
+/* The "what's included" checkmark list under each service's
+   description. The ✓ marks are drawn with ::before rather than
+   being real list bullets, which is why list-style is turned off. */
+.service-features {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0 0;
+  display: grid;
+  gap: 10px;
+}
+.service-features li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+.service-features li::before {
+  content: '✓';
+  color: var(--blue-light);
+  flex-shrink: 0; /* keeps the ✓ from shrinking when the text beside it wraps to multiple lines */
+  font-family: var(--font-mono);
+}
+
+/* A small callout box for being upfront about something. Currently
+   used once, under Networking Setup, to make clear that Cat5/6
+   cable runs are coordinated through a subcontractor rather than
+   done in-house. Kept generic in case another service needs a
+   similar disclosure later. */
+.service-note {
+  font-size: 0.85rem;
+  color: var(--muted-dim);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-top: 16px;
+}
+
 .mockup-caption {
   text-align: center;
   font-family: var(--font-mono);

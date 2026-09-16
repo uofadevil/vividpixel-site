@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- ============================================================
+     VIVID PIXEL — SERVICES PAGE
+     ============================================================
+     This is the detailed breakdown of the four business-facing
+     service lines. The Home page gives the 30-second version and
+     links here; this page is where someone goes when they want to
+     know what's actually involved.
+
+     SECTION IDs MATTER HERE: each service section below has an id
+     (#conference-room, #signage, #av-infrastructure, #networking).
+     The four cards in the Home page hero link directly to those
+     ids, so if you ever rename one, update the matching link in
+     index.html too or it'll stop jumping to the right spot.
+
+     Residential AV is deliberately NOT on this page — it lives on
+     its own page (residential.html, built separately) and is linked
+     from the footer rather than the main nav, so the business-facing
+     pitch stays clean for commercial visitors.
+     ============================================================ -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — AV, Digital Signage &amp; Networking | Vivid Pixel</title>
+<meta name="description" content="Conference room AV, digital signage, AV infrastructure, and networking setup for small and medium businesses across the Tucson metro area.">
+<link rel="icon" href="assets/branding/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+
+<!-- Same header as every other page, with "Services" marked as the
+     current page (aria-current="page"). -->
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <img src="assets/branding/logo-header.png" alt="Vivid Pixel" class="brand-logo" />
+    </a>
+    <nav class="main-nav">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="services.html" aria-current="page">Services</a>
+      <a class="nav-link" href="index.html#how-it-works">How It Works</a>
+      <a class="nav-link" href="about.html">About / Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="about.html" class="btn btn-ghost">Contact</a>
+      <a href="about.html#quote" class="btn btn-primary">Get a Quote</a>
+      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- ============================================================
+       PAGE INTRO
+       Short header block — no big hero here, since people arriving
+       on this page are usually already interested and want to get
+       to the actual service details quickly.
+       ============================================================ -->
+  <section style="padding-top: 60px; padding-bottom: 40px;">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">What We Do</span>
+        <h1 style="font-size: clamp(2rem, 4vw, 2.8rem);">AV that fits your business — and your budget.</h1>
+        <p>Most small businesses get quoted enterprise systems they don't need, or get handed a box and told good luck. We design, install, and support systems sized for how your space is actually used.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ============================================================
+       SERVICE 1 — CONFERENCE ROOM & MEETING SPACE AV
+       ============================================================ -->
+  <section id="conference-room">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Conference Room AV</span>
+        <h2>Meeting spaces that work on the first try.</h2>
+        <p>Nobody should lose ten minutes of a meeting fighting an HDMI cable. We build conference rooms that turn on, connect, and just run.</p>
+      </div>
+      <ul class="service-features">
+        <li>Display selection and mounting sized to the room, not oversold</li>
+        <li>Video conferencing setup — cameras, microphones, and speakers that actually pick up the whole table</li>
+        <li>Room audio tuned so remote participants can hear clearly</li>
+        <li>Simple, single-button controls your whole team can use without training</li>
+        <li>Cable management and connectivity that stays tidy and out of the way</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ============================================================
+       SERVICE 2 — DIGITAL SIGNAGE
+       This section reuses the animated "live preview" mock screen
+       that used to be the Home page hero. The rotating photos and
+       the click-to-enlarge lightbox are both handled by script.js,
+       exactly as they were before — nothing about how they work
+       changed, the markup just lives here now instead.
+
+       TO ADD/REMOVE/REORDER PREVIEW PHOTOS: copy or delete a whole
+       <div class="slide"> block below and point its <img src="">
+       at a file in assets/industries/. Keep class="slide active"
+       on whichever one should show first, and keep
+       class="lightbox-trigger" on any image you want clickable.
+       script.js adapts to however many slides exist — no JS edits
+       needed.
+       ============================================================ -->
+  <section id="signage">
+    <div class="wrap service-split">
+      <div>
+        <span class="eyebrow">Digital Signage</span>
+        <h2>Turn any screen into a living storefront.</h2>
+        <p>Menus, promos, hours, and announcements you update from your phone in seconds — no reprinting, no waiting on a designer.</p>
+        <ul class="service-features">
+          <li>Screens and players installed and configured end to end</li>
+          <li>Update content yourself from any device, anywhere</li>
+          <li>Schedule content ahead — happy hour, daily specials, seasonal promos</li>
+          <li>Run multiple screens with different content from one place</li>
+          <li>We'll build your first playlists so you're not starting from a blank screen</li>
+        </ul>
+      </div>
+
+      <!-- The mock signage screen visual (moved here from the old
+           Home hero). See the note above this section for how to
+           swap the photos inside it. -->
+      <div>
+        <div class="screen-mockup">
+          <div class="screen-mockup-bar">
+            <span class="live">LIVE PREVIEW</span>
+            <span>REAL CUSTOMER USE CASES</span>
+          </div>
+          <div class="screen image-screen">
+            <div class="slide active">
+              <img src="assets/industries/sportsbar-menu-01.png" alt="Sports bar menu screen preview" class="lightbox-trigger" />
+            </div>
+            <div class="slide">
+              <img src="assets/industries/salon-services-01.png" alt="Salon services screen preview" class="lightbox-trigger" />
+            </div>
+            <div class="slide">
+              <img src="assets/industries/restaurant-menu-01.png" alt="Restaurant menu screen preview" class="lightbox-trigger" />
+            </div>
+          </div>
+        </div>
+        <p class="mockup-caption">Examples of digital signage deployed in real business environments — click an image to enlarge.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ============================================================
+       SERVICE 3 — AV INFRASTRUCTURE
+       ============================================================ -->
+  <section id="av-infrastructure">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">AV Infrastructure</span>
+        <h2>The mounting, wiring, and sound behind it all.</h2>
+        <p>The unglamorous part that determines whether everything else works. Done right the first time, so you're not calling someone back in six months.</p>
+      </div>
+      <ul class="service-features">
+        <li>Professional display and TV mounting — properly anchored, safely rated for the wall and screen</li>
+        <li>Background music and paging systems for restaurants, retail, and offices</li>
+        <li>Speaker placement and zoning so volume works across the whole space</li>
+        <li>Source switching and connectivity between displays, players, and devices</li>
+        <li>Cleanup and consolidation of existing setups that grew messy over time</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ============================================================
+       SERVICE 4 — NETWORKING SETUP
+       NOTE: the .service-note callout at the end of this section is
+       important — it's there to be straightforward that Cat5/6 cable
+       runs are coordinated through a licensed subcontractor rather
+       than performed in-house. Please don't remove or soften that
+       without thinking it through: being accurate about who does
+       what matters both for customer trust and for keeping the
+       liability/insurance picture clean if something goes wrong on
+       a cabling job.
+       ============================================================ -->
+  <section id="networking">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Networking Setup</span>
+        <h2>The network your AV actually depends on.</h2>
+        <p>Digital signage, video conferencing, and streaming all live or die by the network behind them. We make sure that part isn't an afterthought.</p>
+      </div>
+      <ul class="service-features">
+        <li>Network switch setup and configuration</li>
+        <li>VLAN and port configuration to keep AV traffic separated and reliable</li>
+        <li>Wireless access point placement and configuration for solid coverage</li>
+        <li>Troubleshooting existing networks that drop, lag, or bottleneck</li>
+        <li>Coordination of structured cabling (Cat5e/Cat6) runs for new or expanding spaces</li>
+      </ul>
+      <p class="service-note">A note on cabling: structured cable runs are coordinated through trusted, licensed local contractors — either ours or your preferred contractor if you already have one. Switch configuration, network setup, and everything that happens after the cable is pulled is handled directly by us.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CALL TO ACTION
+       ============================================================ -->
+  <section>
+    <div class="wrap">
+      <div class="cta-band">
+        <div>
+          <h2>Not sure where to start?</h2>
+          <p>Tell us about your space and we'll help you figure out what's actually worth doing.</p>
+        </div>
+        <a href="about.html#quote" class="btn btn-primary">Get a Free Quote</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Vivid Pixel</h4>
+        <p>AV consulting, digital signage, and networking for Tucson-area businesses.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:Nate.Berg@vividpixel.biz">Nate.Berg@vividpixel.biz</a>
+        <a href="tel:5201234567">(520) 123-4567</a>
+      </div>
+      <div class="footer-col">
+        <h4>Site</h4>
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About / Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Vivid Pixel. Tucson, AZ.</span>
+      <span>Serving the greater Tucson metro area.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- The lightbox overlay — required on this page now, since the
+     clickable signage preview images moved here from the Home page.
+     Same shared element as before; script.js swaps which image it
+     displays based on what was clicked. -->
+<div id="lightbox" class="lightbox" aria-hidden="true">
+  <button class="lightbox-close" aria-label="Close enlarged image">&times;</button>
+  <img class="lightbox-img" src="" alt="">
+</div>
+
+<script src="script.js?v=2"></script>
+</body>
+</html>
