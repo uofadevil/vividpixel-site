@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- ============================================================
+     VIVID PIXEL — RESIDENTIAL AV PAGE
+     ============================================================
+     This page is DELIBERATELY not in the main site nav — it's only
+     linked from the footer (on every page, including this one).
+     That's intentional, not an oversight: the main nav and Home/
+     Services pages are built to look professional to a business
+     decision-maker, and mixing "we mount TVs for homeowners" into
+     that same top-level nav would undercut that. This page still
+     exists, is fully linkable (e.g. for word-of-mouth in a specific
+     neighborhood or community), and shares the same header/footer
+     as every other page — it's just not pushed to the front of the
+     business-facing experience.
+
+     The core positioning here (see the hero below) is: Vivid Pixel
+     offers a lot of the same services as a national big-box store's
+     install/tech-support arm, but from a real local business instead
+     of a corporate scheduling system.
+     ============================================================ -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Residential AV &amp; Home Tech Help — Vivid Pixel</title>
+<meta name="description" content="TV mounting, home theater setup, and home networking help across the greater Tucson area — the same services as a big-box store, from a locally owned business.">
+<link rel="icon" href="assets/branding/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+
+<!-- Same header/nav as every other page. Notice none of the main-nav
+     links get aria-current="page" here — that's correct, since this
+     page isn't part of that nav. The logo and every nav link still
+     work normally to get back to the main site. -->
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <img src="assets/branding/logo-header.png" alt="Vivid Pixel" class="brand-logo" />
+    </a>
+    <nav class="main-nav">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="services.html">Services</a>
+      <a class="nav-link" href="index.html#how-it-works">How It Works</a>
+      <a class="nav-link" href="about.html">About / Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="about.html" class="btn btn-ghost">Contact</a>
+      <a href="about.html#quote" class="btn btn-primary">Get a Quote</a>
+      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- ============================================================
+       INTRO / POSITIONING
+       This is the section that matters most on this page — it
+       directly states the "same as a big-box store, but local"
+       angle you asked for, rather than leaving it implied.
+       ============================================================ -->
+  <section style="padding-top: 60px; padding-bottom: 20px;">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Residential AV &amp; Home Tech</span>
+        <h1 style="font-size: clamp(2rem, 4vw, 2.8rem);">The same help you'd book at a big-box store — without the big-box store.</h1>
+        <p>TV mounting, home theater setup, and home networking help across the greater Tucson area. Vivid Pixel handles a lot of the same work as a national retailer's install team or tech-support desk — but you're booking a local business, not a call center, and the person who shows up is the person who'll answer if something's not right afterward.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ============================================================
+       WHAT'S INCLUDED
+       Reuses the same .service-features checklist style from
+       services.html, kept consistent across the site.
+       ============================================================ -->
+  <section class="tight">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">What We Help With</span>
+        <h2>Home tech, handled right the first time.</h2>
+      </div>
+      <ul class="service-features">
+        <li>TV mounting — wall type, height, and cable concealment done properly, not just a bracket and a prayer</li>
+        <li>Home theater setup — receivers, soundbars, speakers, and streaming devices all talking to each other correctly</li>
+        <li>Home WiFi troubleshooting and mesh network setup for dead zones and dropped connections</li>
+        <li>Smart home basics — video doorbells, smart speakers, and streaming devices set up and explained, not just plugged in</li>
+        <li>General "what's wrong with this" tech help for the stuff that piles up after a new gadget purchase</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ============================================================
+       WHY LOCAL VS. BIG BOX
+       Reuses the same .why-grid pattern from the Home page, applied
+       to a residential-specific comparison instead of the general
+       business pitch.
+       ============================================================ -->
+  <section class="tight">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Why Not Just Call the Big Box Store?</span>
+        <h2>You can — this is just usually better.</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-item">
+          <span class="mark">✓</span>
+          <div>
+            <h3>No corporate scheduling window</h3>
+            <p>No 4-hour arrival windows or a different technician every visit — you're working directly with one person.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <span class="mark">✓</span>
+          <div>
+            <h3>No upsell quota</h3>
+            <p>Recommendations are based on your space, not a store's attach-rate targets for cables and extended warranties.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <span class="mark">✓</span>
+          <div>
+            <h3>Real AV background, not a retail script</h3>
+            <p>The same commercial-grade AV and networking experience behind Vivid Pixel's business work, applied at home.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <span class="mark">✓</span>
+          <div>
+            <h3>Someone to call afterward</h3>
+            <p>If something's not right a week later, you're calling the person who did the work — not a national help line.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ============================================================
+       SERVICE AREA
+       Mentions SaddleBrooke/SaddleBrooke Ranch by name since that's
+       a specific community this page may get shared in directly,
+       while staying broad enough for general Tucson-area visitors.
+       ============================================================ -->
+  <section class="tight">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Service Area</span>
+        <h2>Serving the greater Tucson area, including SaddleBrooke &amp; SaddleBrooke Ranch.</h2>
+        <p>If you're not sure whether your neighborhood is covered, just ask — the quote form below takes a minute either way.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CALL TO ACTION
+       Same quote form/page as the business side — the "Business
+       Name" field on that form is already optional, so it works
+       fine for a residential request too without needing a second,
+       separate form to maintain.
+       ============================================================ -->
+  <section>
+    <div class="wrap">
+      <div class="cta-band">
+        <div>
+          <h2>Got a TV that needs a real home?</h2>
+          <p>Tell us what you're working with and we'll get back to you shortly.</p>
+        </div>
+        <a href="about.html#quote" class="btn btn-primary">Get a Free Quote</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Same footer as every other page, including the Residential AV
+     link — which now appears here AND on index.html, services.html,
+     and about.html, so it's reachable from anywhere on the site. -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Vivid Pixel</h4>
+        <p>AV consulting, digital signage, and networking for Tucson-area businesses — and homes.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:Nate.Berg@vividpixel.biz">Nate.Berg@vividpixel.biz</a>
+        <a href="tel:5201234567">(520) 123-4567</a>
+      </div>
+      <div class="footer-col">
+        <h4>Site</h4>
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About / Contact</a>
+        <a href="residential.html">Residential AV</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Vivid Pixel. Tucson, AZ.</span>
+      <span>Serving the greater Tucson metro area.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js?v=2"></script>
+</body>
+</html>
